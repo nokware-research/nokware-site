@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Block common crawler paths that don't exist
+Disallow: /api/
+Disallow: /admin/
+Disallow: /.git/
+Disallow: /node_modules/
+
+# Sitemap
+Sitemap: https://nokware-research.org/sitemap.xml
