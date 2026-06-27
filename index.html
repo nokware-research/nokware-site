@@ -1,1020 +1,1219 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- ── Security Meta Tags ─────────────────────────────────── -->
-    <meta http-equiv="Content-Security-Policy"
-          content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nokware Research Solutions</title>
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=()">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#0A1628">
+    <meta name="color-scheme" content="dark light">
     <link rel="canonical" href="https://nokware-research.org/">
-    <title>Nokware Research Solutions</title>
-
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
-    <!-- Tailwind CSS CDN with custom config -->
-    <script src="https://cdn.tailwindcss.com" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              'nokware-navy': '#0A1628',
-              'nokware-teal': '#0D9488',
-              'nokware-gold': '#D97706',
-              'nokware-light': '#F0FDF9',
-              'nokware-slate': '#1E293B',
-              'nokware-muted': '#64748B',
+              navy: '#0A1628',
+              navydark: '#060f1d',
+              navymid: '#0d1f3a',
+              teal: '#0D9488',
+              cyan: '#06B6D4',
+              amber: '#F59E0B',
+              purple: '#7C3AED',
+              emerald: '#059669',
+              slate: '#1E293B',
+              light: '#F0FDF9',
             },
             fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            },
-          },
-        },
-      };
+              inter: ['Inter', 'system-ui', 'sans-serif'],
+            }
+          }
+        }
+      }
     </script>
-
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-      *, *::before, *::after { box-sizing: border-box; }
-      body { font-family: 'Inter', sans-serif; margin: 0; color: #1E293B; scroll-behavior: smooth; }
-      section { scroll-margin-top: 64px; }
-
-      /* Animated hero gradient */
-      @keyframes gradientShift {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+      :root {
+        --navy: #0A1628;
+        --navydark: #060f1d;
+        --navymid: #0d1f3a;
+        --teal: #0D9488;
+        --cyan: #06B6D4;
+        --amber: #F59E0B;
+        --purple: #7C3AED;
+        --emerald: #059669;
+        --slate: #1E293B;
+        --light: #F0FDF9;
       }
-      .hero-gradient {
-        background: linear-gradient(-45deg, #0A1628, #0f2d4a, #0D9488, #134e4a, #0A1628, #1a1060);
-        background-size: 400% 400%;
-        animation: gradientShift 12s ease infinite;
-      }
-
-      /* Gradient text utility */
-      .gradient-text {
-        background: linear-gradient(135deg, #0D9488 0%, #2DD4BF 50%, #D97706 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-      .gradient-text-gold {
-        background: linear-gradient(135deg, #D97706 0%, #F59E0B 50%, #FCD34D 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-
-      /* Glowing button */
-      .btn-glow {
-        box-shadow: 0 0 20px rgba(13,148,136,0.4), 0 4px 15px rgba(13,148,136,0.2);
-        transition: box-shadow 0.3s ease, transform 0.2s ease;
-      }
-      .btn-glow:hover {
-        box-shadow: 0 0 35px rgba(13,148,136,0.6), 0 8px 25px rgba(13,148,136,0.3);
-        transform: translateY(-2px);
-      }
-
-      /* Colorful card borders */
-      .card-red    { border-top: 3px solid #EF4444; background: linear-gradient(180deg, rgba(239,68,68,0.05) 0%, rgba(255,255,255,0.03) 100%); }
-      .card-amber  { border-top: 3px solid #F59E0B; background: linear-gradient(180deg, rgba(245,158,11,0.05) 0%, rgba(255,255,255,0.03) 100%); }
-      .card-purple { border-top: 3px solid #A855F7; background: linear-gradient(180deg, rgba(168,85,247,0.05) 0%, rgba(255,255,255,0.03) 100%); }
-      .card-teal-top { border-top: 3px solid #0D9488; }
-
-      /* Gradient icon backgrounds */
-      .icon-gradient-teal { background: linear-gradient(135deg, rgba(13,148,136,0.2) 0%, rgba(45,212,191,0.1) 100%); }
-      .icon-gradient-red  { background: linear-gradient(135deg, rgba(239,68,68,0.15) 0%, rgba(239,68,68,0.05) 100%); }
-      .icon-gradient-amber{ background: linear-gradient(135deg, rgba(245,158,11,0.15) 0%, rgba(245,158,11,0.05) 100%); }
-      .icon-gradient-purple{background: linear-gradient(135deg, rgba(168,85,247,0.15) 0%, rgba(168,85,247,0.05) 100%); }
-
-      /* Glowing orb enhancements */
-      .orb-1 { background: radial-gradient(circle, rgba(13,148,136,0.35) 0%, rgba(13,148,136,0.08) 60%, transparent 100%); }
-      .orb-2 { background: radial-gradient(circle, rgba(45,212,191,0.2) 0%, rgba(13,148,136,0.05) 60%, transparent 100%); }
-      .orb-3 { background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, rgba(99,102,241,0.05) 60%, transparent 100%); }
-
-      /* Floating animation */
-      @keyframes float {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-12px); }
-      }
-      .float-slow { animation: float 6s ease-in-out infinite; }
-      .float-med  { animation: float 4s ease-in-out infinite 1s; }
-
-      /* Section divider gradient */
-      .section-divider {
-        height: 2px;
-        background: linear-gradient(90deg, transparent 0%, #0D9488 30%, #D97706 70%, transparent 100%);
-      }
-
-      /* Stats bar */
-      .stat-number {
-        font-size: 2rem;
-        font-weight: 800;
-        background: linear-gradient(135deg, #0D9488, #2DD4BF);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-
-      /* Card hover effect */
-      .card-hover {
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-      }
-      .card-hover:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 25px 50px rgba(13,148,136,0.18), 0 10px 20px rgba(0,0,0,0.08);
-      }
-
-      /* Glassmorphism nav */
-      .nav-glass {
-        background: rgba(10,22,40,0.92);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-      }
-
-      /* Pulsing badge dot */
-      @keyframes pulse-slow {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.65; }
-      }
-      .badge-pulse {
-        animation: pulse-slow 3s ease-in-out infinite;
-      }
-
-      /* Fade-up animation */
-      @keyframes fadeUp {
-        from { opacity: 0; transform: translateY(24px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      .fade-up {
-        animation: fadeUp 0.7s ease forwards;
-      }
-
-      /* Grid pattern for hero */
-      .hero-grid {
-        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      }
-
-      /* Smooth scroll */
+      *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
       html { scroll-behavior: smooth; }
+      body { font-family: 'Inter', system-ui, sans-serif; color: var(--slate); overflow-x: hidden; }
+
+      @keyframes meshMove {
+        0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 0% 0%; }
+        33% { background-position: 100% 0%, 0% 100%, 30% 70%, 0% 0%; }
+        66% { background-position: 50% 100%, 50% 0%, 80% 20%, 0% 0%; }
+      }
+      @keyframes floatA { 0%,100%{transform:translateY(0) rotate(0deg);} 50%{transform:translateY(-20px) rotate(5deg);} }
+      @keyframes floatB { 0%,100%{transform:translateY(0) rotate(0deg);} 50%{transform:translateY(-14px) rotate(-4deg);} }
+      @keyframes floatC { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
+      @keyframes revealUp { from{opacity:0;transform:translateY(40px);} to{opacity:1;transform:translateY(0);} }
+      @keyframes revealLeft { from{opacity:0;transform:translateX(-40px);} to{opacity:1;transform:translateX(0);} }
+      @keyframes revealRight { from{opacity:0;transform:translateX(40px);} to{opacity:1;transform:translateX(0);} }
+      @keyframes revealScale { from{opacity:0;transform:scale(0.85);} to{opacity:1;transform:scale(1);} }
+      @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+      @keyframes bounceDown { 0%,100%{transform:translateY(0);} 50%{transform:translateY(8px);} }
+      @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+      @keyframes heroFade1 { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+
+      .grad-teal { background:linear-gradient(135deg,#0D9488,#06B6D4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+      .grad-gold { background:linear-gradient(135deg,#F59E0B,#FCD34D); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+      .grad-full { background:linear-gradient(135deg,#0D9488 0%,#06B6D4 40%,#7C3AED 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+      .glow-teal { box-shadow: 0 0 30px rgba(13,148,136,0.35), 0 4px 20px rgba(13,148,136,0.2); }
+      .glow-cyan { box-shadow: 0 0 30px rgba(6,182,212,0.35); }
+
+      .card { background:white; border-radius:20px; border:1px solid rgba(13,148,136,0.1); transition:all 0.3s cubic-bezier(0.4,0,0.2,1); }
+      .card:hover { transform:translateY(-8px); box-shadow:0 32px 64px rgba(13,148,136,0.15); border-color:rgba(13,148,136,0.3); }
+
+      .pill { display:inline-flex; align-items:center; gap:6px; padding:4px 14px; border-radius:999px; font-size:0.75rem; font-weight:600; letter-spacing:0.05em; }
+      .section-label { font-size:0.75rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--teal); }
+
+      .reveal { opacity:0; }
+      .reveal.revealed { animation-fill-mode:forwards; animation-duration:0.7s; animation-timing-function:cubic-bezier(0.4,0,0.2,1); }
+      .reveal-up.revealed { animation-name:revealUp; }
+      .reveal-left.revealed { animation-name:revealLeft; }
+      .reveal-right.revealed { animation-name:revealRight; }
+      .reveal-scale.revealed { animation-name:revealScale; }
+      .reveal.delay-1 { animation-delay:0.1s; }
+      .reveal.delay-2 { animation-delay:0.2s; }
+      .reveal.delay-3 { animation-delay:0.3s; }
+      .reveal.delay-4 { animation-delay:0.4s; }
+      .reveal.delay-5 { animation-delay:0.5s; }
+
+      /* Nav */
+      .main-nav { transition: background 0.3s, border-color 0.3s, box-shadow 0.3s; }
+      .main-nav.scrolled { background: rgba(10,22,40,0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(13,148,136,0.2); box-shadow:0 4px 30px rgba(0,0,0,0.3); }
+
+      .nav-link { color:rgba(255,255,255,0.7); font-size:14px; font-weight:500; transition:color 0.2s, border-color 0.2s; border-bottom:2px solid transparent; padding-bottom:4px; }
+      .nav-link:hover { color:white; }
+      .nav-link.active { color:white; border-bottom-color:var(--teal); }
+
+      /* Hero */
+      .hero-bg {
+        background:
+          radial-gradient(ellipse 80% 60% at 20% 40%, rgba(13,148,136,0.25) 0%, transparent 60%),
+          radial-gradient(ellipse 60% 80% at 80% 20%, rgba(6,182,212,0.15) 0%, transparent 60%),
+          radial-gradient(ellipse 50% 50% at 50% 80%, rgba(124,58,237,0.12) 0%, transparent 60%),
+          linear-gradient(135deg, #0A1628 0%, #0d1f3a 50%, #0A1628 100%);
+        animation: meshMove 15s ease infinite;
+        background-size: 200% 200%, 200% 200%, 200% 200%, 100% 100%;
+      }
+
+      .dot-grid {
+        background-image: radial-gradient(circle, rgba(255,255,255,0.02) 1px, transparent 1px);
+        background-size: 30px 30px;
+      }
+
+      /* Feature tabs */
+      .feature-tab { padding:14px 20px; border-left:3px solid transparent; cursor:pointer; transition:all 0.2s; border-radius:0 12px 12px 0; color:rgba(255,255,255,0.6); }
+      .feature-tab:hover { background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.85); }
+      .feature-tab.active { border-left-color:var(--teal); background:rgba(255,255,255,0.05); color:white; }
+      .feature-panel { display:none; }
+      .feature-panel.active { display:block; animation: fadeIn 0.3s ease; }
+
+      /* Problem cards mobile scroll */
+      .problem-scroll { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+      .problem-scroll > * { scroll-snap-align: center; }
+
+      /* Scroll to top */
+      .scroll-top-btn { opacity:0; pointer-events:none; transition:opacity 0.3s, transform 0.3s; }
+      .scroll-top-btn.visible { opacity:1; pointer-events:auto; }
+      .scroll-top-btn:hover { transform:scale(1.1); }
+
+      /* Tech pill hover */
+      .tech-pill { transition: all 0.2s; }
+      .tech-pill:hover { box-shadow:0 8px 24px rgba(13,148,136,0.15); border-color:var(--teal) !important; }
+
+      /* Mobile menu */
+      .mobile-overlay { transform:translateX(100%); transition:transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+      .mobile-overlay.open { transform:translateX(0); }
+
+      /* Browser mockup */
+      .browser-dot { width:12px; height:12px; border-radius:50%; }
+
+      /* Hamburger animation */
+      .hamburger span { display:block; width:22px; height:2px; background:white; transition:all 0.3s; border-radius:2px; }
+      .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+      .hamburger.open span:nth-child(2) { opacity:0; }
+      .hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+      /* Pillar blob shapes */
+      .blob-1 { width:260px; height:260px; border-radius:60% 40% 50% 50% / 50% 60% 40% 50%; background:linear-gradient(135deg, rgba(13,148,136,0.15), rgba(6,182,212,0.1)); }
+      .blob-2 { width:240px; height:240px; border-radius:40% 60% 50% 50% / 60% 40% 50% 60%; background:linear-gradient(135deg, rgba(124,58,237,0.12), rgba(13,148,136,0.08)); }
+      .blob-3 { width:250px; height:250px; border-radius:50% 50% 40% 60% / 40% 60% 50% 50%; background:linear-gradient(135deg, rgba(6,182,212,0.12), rgba(5,150,105,0.1)); }
+      .blob-4 { width:230px; height:230px; border-radius:60% 40% 60% 40% / 50% 50% 50% 50%; background:linear-gradient(135deg, rgba(245,158,11,0.12), rgba(13,148,136,0.1)); }
     </style>
-  </head>
+</head>
+<body data-id="0" class="font-inter">
+  <app-icon data-id="1" hidden data-icon="flask-round" data-palette="Green"></app-icon>
 
-  <body data-id="0" class="bg-white text-nokware-slate">
-    <app-icon data-id="1" hidden data-icon="flask-round" data-palette="Green"></app-icon>
-
-    <!-- ═══════════════════════════════════════════════════════════════
-         SECTION 1: FIXED NAVIGATION
-    ════════════════════════════════════════════════════════════════ -->
-    <nav data-id="2" class="nav-glass fixed top-0 left-0 right-0 z-50 border-b border-white/10" style="height:64px;">
-      <div data-id="3" class="max-w-7xl mx-auto px-4 md:px-6 h-full flex items-center justify-between">
-
-        <!-- Logo -->
-        <a data-id="4" href="#hero" class="flex items-center gap-2.5 shrink-0">
-          <!-- Hexagon Logo SVG -->
-          <svg data-id="5" width="32" height="36" viewBox="0 0 32 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path data-id="6" d="M16 0L30.5 8.5V27.5L16 36L1.5 27.5V8.5L16 0Z" fill="#0D9488"/>
-            <polygon data-id="7" points="16,8 24,13 24,23 16,28 8,23 8,13" fill="white" opacity="0.9"/>
-            <circle data-id="8" cx="16" cy="18" r="3" fill="#0D9488"/>
-          </svg>
-          <span data-id="9" class="text-white font-bold text-lg tracking-tight">Nokware</span>
-        </a>
-
-        <!-- Desktop Nav Links -->
-        <div data-id="10" class="hidden md:flex items-center gap-7">
-          <a data-id="11" href="#problem" class="text-white/65 hover:text-nokware-teal text-sm font-medium transition-colors">The Problem</a>
-          <a data-id="12" href="#approach" class="text-white/65 hover:text-nokware-teal text-sm font-medium transition-colors">Approach</a>
-          <a data-id="13" href="#edelegate" class="text-white/65 hover:text-nokware-teal text-sm font-medium transition-colors">e-Delegate</a>
-          <a data-id="14" href="#developers" class="text-white/65 hover:text-nokware-teal text-sm font-medium transition-colors">Developers</a>
-          <a data-id="15" href="#about" class="text-white/65 hover:text-nokware-teal text-sm font-medium transition-colors">About</a>
+  <!-- ===================== NAVIGATION ===================== -->
+  <nav data-id="2" id="main-nav-el2k" class="main-nav fixed top-0 left-0 right-0 z-50 border-b border-transparent">
+    <div data-id="3" class="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between h-16 md:h-[72px]">
+      <!-- Logo -->
+      <a data-id="4" href="#" class="flex items-center gap-2.5 flex-shrink-0">
+        <svg data-id="5" width="36" height="36" viewBox="0 0 40 40" fill="none">
+          <defs data-id="6"><linearGradient data-id="7" id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop data-id="8" offset="0%" stop-color="#0D9488"/><stop data-id="9" offset="100%" stop-color="#06B6D4"/></linearGradient></defs>
+          <polygon data-id="10" points="20,2 36,11 36,29 20,38 4,29 4,11" fill="url(#logoGrad)" opacity="0.9"/>
+          <polygon data-id="11" points="20,8 30,14 30,26 20,32 10,26 10,14" fill="none" stroke="white" stroke-width="1.5" opacity="0.6"/>
+          <circle data-id="12" cx="20" cy="20" r="4" fill="white" opacity="0.9"/>
+        </svg>
+        <div data-id="13" class="flex flex-col leading-tight">
+          <span data-id="14" class="text-white font-bold text-lg tracking-tight">Nokware</span>
+          <span data-id="15" class="text-xs text-teal-400/50 font-medium -mt-0.5 hidden sm:block">Research Solutions</span>
         </div>
+      </a>
 
-        <!-- Desktop CTA -->
-        <a data-id="16" href="https://e-delegate.qrx-jay.workers.dev" target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex items-center gap-2 bg-nokware-teal text-white text-sm font-semibold px-5 py-2 rounded-lg hover:bg-teal-600 transition-colors">
+      <!-- Desktop nav -->
+      <div data-id="16" class="hidden md:flex items-center gap-8">
+        <a data-id="17" href="#problem" class="nav-link" data-nav-section="problem">The Problem</a>
+        <a data-id="18" href="#approach" class="nav-link" data-nav-section="approach">Approach</a>
+        <a data-id="19" href="#edelegate" class="nav-link" data-nav-section="edelegate">e-Delegate</a>
+        <a data-id="20" href="#developers" class="nav-link" data-nav-section="developers">Developers</a>
+        <a data-id="21" href="#about" class="nav-link" data-nav-section="about">About</a>
+      </div>
+
+      <!-- Right actions -->
+      <div data-id="22" class="hidden md:flex items-center gap-3">
+        <a data-id="23" href="https://github.com/nokware-research" target="_blank" rel="noopener" class="flex items-center gap-2 text-white/70 hover:text-white text-sm font-medium px-4 py-2 rounded-xl border border-white/20 hover:border-white/40 transition-all">
+          <svg data-id="24" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path data-id="25" d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a data-id="26" href="https://app.nokware-research.org" target="_blank" rel="noopener" class="flex items-center gap-2 text-white text-sm font-semibold px-5 py-2.5 rounded-xl hover:glow-teal transition-all" style="background:linear-gradient(135deg,#0D9488,#06B6D4);">
           Launch App
-          <svg data-id="17" width="14" height="14" viewBox="0 0 14 14" fill="none"><path data-id="18" d="M2 2h4v1.5H3.5v7h7V9H12v4H2V2zm5 0h5v5h-1.5V4.06L6.03 8.53 4.97 7.47 9.44 3H7V2z" fill="currentColor"/></svg>
+          <svg data-id="27" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path data-id="28" d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-
-        <!-- Mobile Hamburger -->
-        <button data-id="19" id="mobile-menu-btn" class="md:hidden p-2 text-white" aria-label="Open menu">
-          <svg data-id="20" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line data-id="21" x1="3" y1="6" x2="21" y2="6"/><line data-id="22" x1="3" y1="12" x2="21" y2="12"/><line data-id="23" x1="3" y1="18" x2="21" y2="18"/></svg>
-        </button>
       </div>
 
-      <!-- Mobile Dropdown Menu -->
-      <div data-id="24" id="mobile-menu" class="hidden md:hidden nav-glass border-t border-white/10">
-        <div data-id="25" class="px-4 py-4 flex flex-col gap-3">
-          <a data-id="26" href="#problem" class="mobile-nav-link text-white/75 hover:text-nokware-teal text-sm font-medium py-2 transition-colors">The Problem</a>
-          <a data-id="27" href="#approach" class="mobile-nav-link text-white/75 hover:text-nokware-teal text-sm font-medium py-2 transition-colors">Approach</a>
-          <a data-id="28" href="#edelegate" class="mobile-nav-link text-white/75 hover:text-nokware-teal text-sm font-medium py-2 transition-colors">e-Delegate</a>
-          <a data-id="29" href="#developers" class="mobile-nav-link text-white/75 hover:text-nokware-teal text-sm font-medium py-2 transition-colors">Developers</a>
-          <a data-id="30" href="#about" class="mobile-nav-link text-white/75 hover:text-nokware-teal text-sm font-medium py-2 transition-colors">About</a>
-          <a data-id="31" href="#edelegate" class="mobile-nav-link bg-nokware-teal text-white text-sm font-semibold px-5 py-2.5 rounded-lg text-center mt-1 hover:bg-emerald-600 transition-colors">See e-Delegate</a>
+      <!-- Mobile hamburger -->
+      <button data-id="29" id="hamburger-btn-m9x2" class="md:hidden hamburger flex flex-col gap-[5px] p-2 min-h-[44px] min-w-[44px] items-center justify-center" aria-label="Toggle menu">
+        <span data-id="30"></span><span data-id="31"></span><span data-id="32"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile overlay menu -->
+  <div data-id="33" id="mobile-menu-o8k1" class="mobile-overlay fixed inset-0 z-[60] flex flex-col" style="background:rgba(10,22,40,0.98); backdrop-filter:blur(20px);">
+    <div data-id="34" class="flex justify-end p-5">
+      <button data-id="35" id="mobile-close-c3j7" class="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center" aria-label="Close menu">
+        <svg data-id="36" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path data-id="37" d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div data-id="38" class="flex flex-col items-center justify-center flex-1 gap-8">
+      <a data-id="39" href="#problem" class="mobile-nav-link text-white text-2xl font-semibold hover:text-teal-400 transition-colors">The Problem</a>
+      <a data-id="40" href="#approach" class="mobile-nav-link text-white text-2xl font-semibold hover:text-teal-400 transition-colors">Approach</a>
+      <a data-id="41" href="#edelegate" class="mobile-nav-link text-white text-2xl font-semibold hover:text-teal-400 transition-colors">e-Delegate</a>
+      <a data-id="42" href="#developers" class="mobile-nav-link text-white text-2xl font-semibold hover:text-teal-400 transition-colors">Developers</a>
+      <a data-id="43" href="#about" class="mobile-nav-link text-white text-2xl font-semibold hover:text-teal-400 transition-colors">About</a>
+      <div data-id="44" class="flex flex-col gap-4 mt-8 w-64">
+        <a data-id="45" href="https://github.com/nokware-research" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 text-white text-base font-medium px-6 py-3 rounded-xl border border-white/30">
+          <svg data-id="46" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path data-id="47" d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a data-id="48" href="https://app.nokware-research.org" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 text-white text-base font-semibold px-6 py-3 rounded-xl" style="background:linear-gradient(135deg,#0D9488,#06B6D4);">
+          Launch App →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== HERO SECTION ===================== -->
+  <section data-id="49" id="hero-s7q2" class="hero-bg relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Dot grid overlay -->
+    <div data-id="50" class="dot-grid absolute inset-0 z-0 pointer-events-none"></div>
+
+    <!-- Floating shapes -->
+    <div data-id="51" class="absolute pointer-events-none" style="top:8%;right:5%;animation:floatA 8s ease-in-out infinite;opacity:0.15;">
+      <svg data-id="52" width="340" height="340" viewBox="0 0 340 340" fill="none"><polygon data-id="53" points="170,10 320,95 320,245 170,330 20,245 20,95" stroke="#0D9488" stroke-width="1.5" fill="none"/></svg>
+    </div>
+    <div data-id="54" class="absolute pointer-events-none" style="top:35%;left:3%;animation:floatB 10s ease-in-out infinite;opacity:0.1;">
+      <svg data-id="55" width="200" height="200" viewBox="0 0 200 200"><circle data-id="56" cx="100" cy="100" r="90" stroke="#06B6D4" stroke-width="1.5" fill="none"/></svg>
+    </div>
+    <div data-id="57" class="absolute pointer-events-none" style="bottom:15%;left:45%;animation:floatC 6s ease-in-out infinite;opacity:0.08;">
+      <svg data-id="58" width="80" height="80" viewBox="0 0 80 80"><rect data-id="59" x="15" y="15" width="50" height="50" transform="rotate(45 40 40)" fill="#7C3AED"/></svg>
+    </div>
+
+    <!-- Hero content -->
+    <div data-id="60" class="relative z-10 text-center max-w-4xl mx-auto px-5 py-32 md:py-0">
+      <!-- Badge -->
+      <div data-id="61" class="mb-8" style="animation:heroFade1 0.7s 0.3s both;">
+        <div data-id="62" class="pill inline-flex" style="background:rgba(13,148,136,0.15);border:1px solid rgba(13,148,136,0.3);color:#2DD4BF;">
+          <span data-id="63" style="width:6px;height:6px;border-radius:50%;background:#0D9488;display:inline-block;animation:blink 2s infinite;"></span>
+          Open-Source · ICH GCP · 21 CFR Part 11 Ready
         </div>
       </div>
-    </nav>
 
-    <!-- ═══════════════════════════════════════════════════════════════
-         SECTION 2: HERO
-    ════════════════════════════════════════════════════════════════ -->
-    <section data-id="32" id="hero" class="hero-gradient relative min-h-screen flex items-center overflow-hidden">
-      <!-- Grid Pattern Overlay -->
-      <div data-id="33" class="absolute inset-0 hero-grid"></div>
+      <!-- Heading -->
+      <h1 data-id="64" id="hero-heading-h4m1" class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white leading-[1.05] mb-6" style="animation:heroFade1 0.7s 0.5s both;">
+        Clinical Trials Built on<br data-id="65">
+        <span data-id="66" class="grad-teal">Truth,</span> Designed<br data-id="67" class="hidden sm:block">
+        for <span data-id="68" class="grad-gold">People.</span>
+      </h1>
 
-      <!-- Decorative Blur Orbs -->
-      <div data-id="34" class="orb-1 absolute right-0 top-1/4 w-[500px] h-[500px] rounded-full blur-3xl pointer-events-none float-slow"></div>
-      <div data-id="35" class="orb-2 absolute -left-20 bottom-1/3 w-72 h-72 rounded-full blur-3xl pointer-events-none float-med"></div>
-      <div data-id="36" class="orb-3 absolute right-1/3 bottom-10 w-48 h-48 rounded-full blur-3xl pointer-events-none"></div>
+      <!-- Subheading -->
+      <p data-id="69" id="hero-sub-p9n3" class="text-base md:text-lg lg:text-xl text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed" style="animation:heroFade1 0.7s 0.7s both;">
+        Nokware Research Solutions delivers purpose-built clinical trial technology rooted in equity, transparency, and open science — so every trial runs with integrity and every participant matters.
+      </p>
 
-      <div data-id="37" class="relative z-10 max-w-7xl mx-auto px-4 md:px-6 py-32 md:py-40 w-full">
-        <div data-id="38" class="fade-up max-w-3xl">
-          <!-- Badge -->
-          <div data-id="39" class="inline-flex items-center gap-2 bg-nokware-teal/20 border border-nokware-teal/40 rounded-full px-4 py-1.5 mb-8">
-            <span data-id="40" class="badge-pulse w-2 h-2 bg-nokware-teal rounded-full inline-block"></span>
-            <span data-id="41" class="text-nokware-teal text-xs font-medium tracking-wide">Open-Source · ICH GCP · 21 CFR Part 11 Ready</span>
+      <!-- CTA row -->
+      <div data-id="70" class="flex flex-wrap justify-center gap-4 mb-10" style="animation:heroFade1 0.7s 0.9s both;">
+        <a data-id="71" href="#edelegate" class="inline-flex items-center gap-2 text-white text-base md:text-lg font-semibold px-7 md:px-8 py-3.5 md:py-4 rounded-2xl glow-teal transition-all hover:scale-105" style="background:linear-gradient(135deg,#0D9488,#06B6D4);">
+          Explore e-Delegate
+          <svg data-id="72" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path data-id="73" d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a data-id="74" href="#approach" class="inline-flex items-center gap-2 text-white text-base md:text-lg font-semibold px-7 md:px-8 py-3.5 md:py-4 rounded-2xl border-2 border-white/30 hover:border-white hover:bg-white/[0.08] transition-all">
+          Our Approach
+        </a>
+      </div>
+
+      <!-- Trust badges -->
+      <div data-id="75" class="flex flex-wrap justify-center gap-3" style="animation:heroFade1 0.7s 1.1s both;">
+        <span data-id="76" class="pill text-teal-200" style="background:rgba(13,148,136,0.2);border:1px solid rgba(13,148,136,0.25);">
+          <svg data-id="77" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path data-id="78" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          ICH GCP Compliant
+        </span>
+        <span data-id="79" class="pill text-emerald-200" style="background:rgba(5,150,105,0.2);border:1px solid rgba(5,150,105,0.25);">
+          <svg data-id="80" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path data-id="81" d="M20 6L9 17l-5-5"/></svg>
+          21 CFR Part 11 Ready
+        </span>
+        <span data-id="82" class="pill text-amber-200" style="background:rgba(245,158,11,0.2);border:1px solid rgba(245,158,11,0.25);">
+          <svg data-id="83" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path data-id="84" d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          100% Open Source
+        </span>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div data-id="85" class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40">
+      <span data-id="86" class="text-xs font-medium tracking-wider uppercase">Scroll to explore</span>
+      <svg data-id="87" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation:bounceDown 2s infinite;"><path data-id="88" d="M6 9l6 6 6-6"/></svg>
+    </div>
+  </section>
+
+  <!-- ===================== STATS COUNTER BAR ===================== -->
+  <section data-id="89" id="stats-bar-s3k9" class="relative py-14 md:py-16" style="background:#0d1f3a;border-top:1px solid rgba(13,148,136,0.2);border-bottom:1px solid rgba(13,148,136,0.2);">
+    <div data-id="90" class="max-w-6xl mx-auto px-5">
+      <div data-id="91" class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-0">
+        <!-- Stat 1 -->
+        <div data-id="92" class="text-center md:border-r md:border-white/10">
+          <div data-id="93" class="text-4xl md:text-5xl font-black grad-teal leading-none mb-2">
+            <span data-id="94" class="counter-num" data-target="14" data-suffix="+">0</span>
           </div>
+          <div data-id="95" class="text-white/50 text-sm">Years in Clinical Research</div>
+        </div>
+        <!-- Stat 2 -->
+        <div data-id="96" class="text-center md:border-r md:border-white/10">
+          <div data-id="97" class="text-4xl md:text-5xl font-black grad-teal leading-none mb-2">
+            <span data-id="98" class="counter-text">Phase I–IV</span>
+          </div>
+          <div data-id="99" class="text-white/50 text-sm">Trial Expertise</div>
+        </div>
+        <!-- Stat 3 -->
+        <div data-id="100" class="text-center md:border-r md:border-white/10">
+          <div data-id="101" class="text-4xl md:text-5xl font-black grad-teal leading-none mb-2">
+            <span data-id="102" class="counter-num" data-target="5" data-suffix="+">0</span>
+          </div>
+          <div data-id="103" class="text-white/50 text-sm">Therapeutic Areas</div>
+        </div>
+        <!-- Stat 4 -->
+        <div data-id="104" class="text-center">
+          <div data-id="105" class="text-4xl md:text-5xl font-black grad-teal leading-none mb-2">
+            <span data-id="106" class="counter-num" data-target="100" data-suffix="%">0</span>
+          </div>
+          <div data-id="107" class="text-white/50 text-sm">Open Source</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          <!-- Headline -->
-          <h1 data-id="42" class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.08] mb-6">
-            Clinical Trials<br data-id="43"/>
-            Built on <span data-id="44" class="gradient-text">Truth,</span><br data-id="45"/>
-            Designed for <span data-id="46" class="gradient-text-gold">People.</span>
-          </h1>
+  <!-- ===================== THE PROBLEM SECTION ===================== -->
+  <section data-id="108" id="problem" class="py-20 md:py-24 bg-white">
+    <div data-id="109" class="max-w-6xl mx-auto px-5">
+      <div data-id="110" class="text-center mb-14 reveal reveal-up">
+        <div data-id="111" class="section-label mb-4">THE PROBLEM</div>
+        <h2 data-id="112" id="problem-heading-h2a5" class="text-3xl md:text-4xl lg:text-5xl font-black text-navy leading-tight mb-5">
+          Clinical Research Is <span data-id="113" class="text-red-500">Broken</span> in Plain Sight.
+        </h2>
+        <p data-id="114" class="text-slate/70 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+          The systems that power clinical trials were not built for the people they affect most. It's time for a fundamental rethink.
+        </p>
+      </div>
 
-          <!-- Sub-text -->
-          <p data-id="47" class="text-white/65 text-lg md:text-xl max-w-2xl leading-relaxed mb-10">
-            Nokware Research Solutions delivers purpose-built clinical trial technology rooted in equity, transparency, and open science — so every trial runs with integrity and every participant matters.
+      <!-- Problem cards -->
+      <div data-id="115" class="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible pb-4 md:pb-0 problem-scroll snap-x snap-mandatory -mx-5 px-5 md:mx-0 md:px-0">
+        <!-- Card 1 -->
+        <div data-id="116" class="card min-w-[300px] md:min-w-0 flex-shrink-0 overflow-hidden reveal reveal-up delay-1">
+          <div data-id="117" class="h-1" style="background:linear-gradient(90deg,#EF4444,#F97316);"></div>
+          <div data-id="118" class="p-7">
+            <div data-id="119" class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style="background:rgba(239,68,68,0.1);">
+              <svg data-id="120" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="121" d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4-4v-2"/><circle data-id="122" cx="9" cy="7" r="4"/><path data-id="123" d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/><path data-id="124" d="M18 8l4-4M22 8l-4-4"/></svg>
+            </div>
+            <h3 data-id="125" class="text-xl font-bold text-navy mb-3">Exclusionary Design</h3>
+            <p data-id="126" class="text-slate/70 text-[15px] leading-relaxed mb-5">
+              Trial platforms assume English fluency, tech literacy, and urban proximity — systematically excluding the communities most affected by disease.
+            </p>
+            <div data-id="127" class="flex flex-wrap gap-2">
+              <span data-id="128" class="pill text-red-600" style="background:rgba(239,68,68,0.1);">Access Barriers</span>
+              <span data-id="129" class="pill text-orange-600" style="background:rgba(249,115,22,0.1);">Language Gaps</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div data-id="130" class="card min-w-[300px] md:min-w-0 flex-shrink-0 overflow-hidden reveal reveal-up delay-2">
+          <div data-id="131" class="h-1" style="background:linear-gradient(90deg,#F59E0B,#EAB308);"></div>
+          <div data-id="132" class="p-7">
+            <div data-id="133" class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style="background:rgba(245,158,11,0.1);">
+              <svg data-id="134" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="135" d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline data-id="136" points="14 2 14 8 20 8"/><line data-id="137" x1="16" y1="13" x2="8" y2="13"/><line data-id="138" x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <h3 data-id="139" class="text-xl font-bold text-navy mb-3">Fragmented Compliance</h3>
+            <p data-id="140" class="text-slate/70 text-[15px] leading-relaxed mb-5">
+              Paper binders, siloed spreadsheets, and manual audit trails create compliance nightmares — risking patient safety and data integrity.
+            </p>
+            <div data-id="141" class="flex flex-wrap gap-2">
+              <span data-id="142" class="pill text-amber-700" style="background:rgba(245,158,11,0.1);">Paper Binders</span>
+              <span data-id="143" class="pill text-yellow-700" style="background:rgba(234,179,8,0.1);">Siloed Data</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div data-id="144" class="card min-w-[300px] md:min-w-0 flex-shrink-0 overflow-hidden reveal reveal-up delay-3">
+          <div data-id="145" class="h-1" style="background:linear-gradient(90deg,#7C3AED,#A855F7);"></div>
+          <div data-id="146" class="p-7">
+            <div data-id="147" class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style="background:rgba(124,58,237,0.1);">
+              <svg data-id="148" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect data-id="149" x="3" y="11" width="18" height="11" rx="2" ry="2"/><path data-id="150" d="M7 11V7a5 5 0 019.9-1"/></svg>
+            </div>
+            <h3 data-id="151" class="text-xl font-bold text-navy mb-3">Opacity Over Trust</h3>
+            <p data-id="152" class="text-slate/70 text-[15px] leading-relaxed mb-5">
+              Black-box EDC systems and vendor lock-in make it impossible for sites to verify, audit, or truly own their own trial data.
+            </p>
+            <div data-id="153" class="flex flex-wrap gap-2">
+              <span data-id="154" class="pill text-purple-700" style="background:rgba(124,58,237,0.1);">Black-box EDC</span>
+              <span data-id="155" class="pill text-violet-700" style="background:rgba(139,92,246,0.1);">Vendor Lock-in</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pull quote -->
+      <div data-id="156" class="mt-12 reveal reveal-up delay-3">
+        <blockquote data-id="157" class="border-l-4 border-teal pl-6 py-4 bg-light rounded-r-2xl max-w-3xl mx-auto">
+          <p data-id="158" class="text-slate text-base md:text-lg italic leading-relaxed">
+            "Clinical trials must earn trust — from participants, regulators, and the public. That trust starts with technology that is transparent by design."
           </p>
+        </blockquote>
+      </div>
+    </div>
+  </section>
 
-          <!-- CTAs -->
-          <div data-id="48" class="flex flex-wrap gap-4 mb-16">
-            <a data-id="49" href="https://e-delegate.qrx-jay.workers.dev" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-r from-nokware-teal to-teal-500 text-white font-semibold px-7 py-3.5 rounded-lg hover:bg-emerald-600 transition-colors text-sm md:text-base btn-glow">
-              Explore e-Delegate
-            </a>
-            <a data-id="50" href="https://e-delegate.qrx-jay.workers.dev" target="_blank" rel="noopener noreferrer"
-               class="inline-flex items-center gap-2 border border-white/30 text-white font-bold px-8 py-4 rounded-xl hover:bg-white/10 transition-colors text-base">
-              Try Live Demo
-              <svg data-id="51" width="16" height="16" viewBox="0 0 16 16" fill="none"><path data-id="52" d="M3 8L6.5 11.5L13 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-            <a data-id="53" href="#approach" class="border border-white/30 text-white font-semibold px-7 py-3.5 rounded-lg hover:border-white/60 hover:bg-white/5 transition-colors text-sm md:text-base">
-              Our Approach
-            </a>
+  <!-- ===================== OUR APPROACH SECTION ===================== -->
+  <section data-id="159" id="approach" class="py-20 md:py-24" style="background:var(--light);">
+    <div data-id="160" class="max-w-6xl mx-auto px-5">
+      <div data-id="161" class="text-center mb-16 reveal reveal-up">
+        <div data-id="162" class="section-label mb-4">OUR APPROACH</div>
+        <h2 data-id="163" id="approach-heading-h7b2" class="text-3xl md:text-4xl lg:text-5xl font-black text-navy leading-tight">
+          <span data-id="164" class="grad-full">Equity-First.</span> Open by Default.<br data-id="165" class="hidden md:block"> Built to Last.
+        </h2>
+      </div>
+
+      <!-- Pillar 1 -->
+      <div data-id="166" class="flex flex-col md:flex-row items-center gap-10 md:gap-16 mb-16 md:mb-20 reveal reveal-left">
+        <div data-id="167" class="flex-1 order-2 md:order-1">
+          <div data-id="168" class="relative">
+            <span data-id="169" class="absolute -top-6 -left-2 text-7xl font-black text-navy/[0.05] select-none">01</span>
+            <div data-id="170" class="w-16 h-16 rounded-2xl flex items-center justify-center mb-5" style="background:linear-gradient(135deg,#0D9488,#06B6D4);">
+              <svg data-id="171" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="172" d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4-4v-2"/><circle data-id="173" cx="9" cy="7" r="4"/><path data-id="174" d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <h3 data-id="175" class="text-2xl md:text-[28px] font-bold text-navy mb-3">Participant-Centered by Architecture</h3>
+            <p data-id="176" class="text-slate/70 text-[15px] leading-relaxed mb-5">
+              Consent workflows designed for comprehension, not just signature capture. Multi-language support, remote participation pathways, and accessibility-first design.
+            </p>
+            <ul data-id="177" class="space-y-2.5">
+              <li data-id="178" class="flex items-start gap-2.5 text-slate/80 text-[15px]"><svg data-id="179" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="180" d="M20 6L9 17l-5-5"/></svg>Comprehension-first informed consent</li>
+              <li data-id="181" class="flex items-start gap-2.5 text-slate/80 text-[15px]"><svg data-id="182" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="183" d="M20 6L9 17l-5-5"/></svg>Multi-language & accessibility-first</li>
+              <li data-id="184" class="flex items-start gap-2.5 text-slate/80 text-[15px]"><svg data-id="185" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="186" d="M20 6L9 17l-5-5"/></svg>Remote participation pathways</li>
+            </ul>
+          </div>
+        </div>
+        <div data-id="187" class="flex-shrink-0 order-1 md:order-2">
+          <div data-id="188" class="blob-1" style="animation:floatA 8s ease-in-out infinite;"></div>
+        </div>
+      </div>
+
+      <!-- Pillar 2 -->
+      <div data-id="189" class="flex flex-col md:flex-row-reverse items-center gap-10 md:gap-16 mb-16 md:mb-20 reveal reveal-right">
+        <div data-id="190" class="flex-1">
+          <div data-id="191" class="relative">
+            <span data-id="192" class="absolute -top-6 -left-2 text-7xl font-black text-navy/[0.05] select-none">02</span>
+            <div data-id="193" class="w-16 h-16 rounded-2xl flex items-center justify-center mb-5" style="background:linear-gradient(135deg,#7C3AED,#A855F7);">
+              <svg data-id="194" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="195" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path data-id="196" d="M9 12l2 2 4-4"/></svg>
+            </div>
+            <h3 data-id="197" class="text-2xl md:text-[28px] font-bold text-navy mb-3">Compliance Without Compromise</h3>
+            <p data-id="198" class="text-slate/70 text-[15px] leading-relaxed mb-5">
+              Every feature is designed with ICH GCP E6(R2) and 21 CFR Part 11 in mind from day one — not bolted on after the fact.
+            </p>
+            <ul data-id="199" class="space-y-2.5">
+              <li data-id="200" class="flex items-start gap-2.5 text-slate/80 text-[15px]"><svg data-id="201" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="202" d="M20 6L9 17l-5-5"/></svg>ICH GCP E6(R2) from day one</li>
+              <li data-id="203" class="flex items-start gap-2.5 text-slate/80 text-[15px]"><svg data-id="204" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="205" d="M20 6L9 17l-5-5"/></svg>21 CFR Part 11 electronic records</li>
+              <li data-id="206" class="flex items-start gap-2.5 text-slate/80 text-[15px]"><svg data-id="207" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="208" d="M20 6L9 17l-5-5"/></svg>FDA inspection-ready audit trails</li>
+            </ul>
+          </div>
+        </div>
+        <div data-id="209" class="flex-shrink-0">
+          <div data-id="210" class="blob-2" style="animation:floatB 10s ease-in-out infinite;"></div>
+        </div>
+      </div>
+
+      <!-- Pillar 3 -->
+      <div data-id="211" class="flex flex-col md:flex-row items-center gap-10 md:gap-16 mb-16 md:mb-20 reveal reveal-left">
+        <div data-id="212" class="flex-1 order-2 md:order-1">
+          <div data-id="213" class="relative">
+            <span data-id="214" class="absolute -top-6 -left-2 text-7xl font-black text-navy/[0.05] select-none">03</span>
+            <div data-id="215" class="w-16 h-16 rounded-2xl flex items-center justify-center mb-5" style="background:linear-gradient(135deg,#06B6D4,#059669);">
+              <svg data-id="216" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="217" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline data-id="218" points="15 3 21 3 21 9"/><line data-id="219" x1="10" y1="14" x2="21" y2="3"/></svg>
+            </div>
+            <h3 data-id="220" class="text-2xl md:text-[28px] font-bold text-navy mb-3">Open by Default</h3>
+            <p data-id="221" class="text-slate/70 text-[15px] leading-relaxed mb-5">
+              MIT-licensed, publicly auditable, community-driven. No black boxes. No vendor lock-in. Full data sovereignty for every site.
+            </p>
+            <ul data-id="222" class="space-y-2.5">
+              <li data-id="223" class="flex items-start gap-2.5 text-slate/80 text-[15px]"><svg data-id="224" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="225" d="M20 6L9 17l-5-5"/></svg>MIT-licensed, forever open</li>
+              <li data-id="226" class="flex items-start gap-2.5 text-slate/80 text-[15px]"><svg data-id="227" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="228" d="M20 6L9 17l-5-5"/></svg>Publicly auditable codebase</li>
+              <li data-id="229" class="flex items-start gap-2.5 text-slate/80 text-[15px]"><svg data-id="230" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="231" d="M20 6L9 17l-5-5"/></svg>Full data sovereignty for sites</li>
+            </ul>
+          </div>
+        </div>
+        <div data-id="232" class="flex-shrink-0 order-1 md:order-2">
+          <div data-id="233" class="blob-3" style="animation:floatC 7s ease-in-out infinite;"></div>
+        </div>
+      </div>
+
+      <!-- Pillar 4 -->
+      <div data-id="234" class="flex flex-col md:flex-row-reverse items-center gap-10 md:gap-16 reveal reveal-right">
+        <div data-id="235" class="flex-1">
+          <div data-id="236" class="relative">
+            <span data-id="237" class="absolute -top-6 -left-2 text-7xl font-black text-navy/[0.05] select-none">04</span>
+            <div data-id="238" class="w-16 h-16 rounded-2xl flex items-center justify-center mb-5" style="background:linear-gradient(135deg,#F59E0B,#FCD34D);">
+              <svg data-id="239" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="240" d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline data-id="241" points="14 2 14 8 20 8"/><path data-id="242" d="M12 18v-6"/><path data-id="243" d="M9 15l3-3 3 3"/></svg>
+            </div>
+            <h3 data-id="244" class="text-2xl md:text-[28px] font-bold text-navy mb-3">Built by People Who've Done It</h3>
+            <p data-id="245" class="text-slate/70 text-[15px] leading-relaxed mb-5">
+              Founded and built by a Senior CRA with 14+ years across Phase I–IV trials in oncology, ophthalmology, immunology, and more.
+            </p>
+            <ul data-id="246" class="space-y-2.5">
+              <li data-id="247" class="flex items-start gap-2.5 text-slate/80 text-[15px]"><svg data-id="248" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="249" d="M20 6L9 17l-5-5"/></svg>14+ years of real-world trial experience</li>
+              <li data-id="250" class="flex items-start gap-2.5 text-slate/80 text-[15px]"><svg data-id="251" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="252" d="M20 6L9 17l-5-5"/></svg>Multiple therapeutic areas</li>
+              <li data-id="253" class="flex items-start gap-2.5 text-slate/80 text-[15px]"><svg data-id="254" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="255" d="M20 6L9 17l-5-5"/></svg>Practitioner-first design philosophy</li>
+            </ul>
+          </div>
+        </div>
+        <div data-id="256" class="flex-shrink-0">
+          <div data-id="257" class="blob-4" style="animation:floatA 9s ease-in-out infinite;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== e-DELEGATE SECTION ===================== -->
+  <section data-id="258" id="edelegate" class="py-20 md:py-24" style="background:var(--navy);">
+    <div data-id="259" class="max-w-6xl mx-auto px-5">
+      <div data-id="260" class="text-center mb-14 reveal reveal-up">
+        <div data-id="261" class="section-label mb-4">e-DELEGATE</div>
+        <h2 data-id="262" id="edelegate-heading-h9c4" class="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-5">
+          One Platform. Every Delegation Workflow.
+        </h2>
+        <p data-id="263" class="text-white/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+          The open-source electronic delegation log that replaces paper binders, siloed spreadsheets, and fragmented email threads.
+        </p>
+      </div>
+
+      <!-- Live App CTA Banner -->
+      <div data-id="264" class="reveal reveal-up delay-1 rounded-2xl p-5 md:p-6 mb-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-4" style="background:rgba(13,148,136,0.12);border:1px solid rgba(13,148,136,0.3);">
+        <div data-id="265" class="flex items-center gap-3">
+          <span data-id="266" class="w-3 h-3 rounded-full bg-teal flex-shrink-0" style="animation:blink 2s infinite;box-shadow:0 0 8px rgba(13,148,136,0.6);"></span>
+          <div data-id="267">
+            <div data-id="268" class="text-white font-semibold text-base">e-Delegate is live</div>
+            <div data-id="269" class="text-white/50 text-sm">Production-ready delegation management for clinical sites</div>
+          </div>
+        </div>
+        <div data-id="270" class="flex items-center gap-3 flex-shrink-0">
+          <a data-id="271" href="https://app.nokware-research.org" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-white text-sm font-semibold px-5 py-2.5 rounded-xl" style="background:linear-gradient(135deg,#0D9488,#06B6D4);">
+            Launch App →
+          </a>
+          <a data-id="272" href="https://github.com/nokware-research/e-delegate" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-white/70 text-sm font-medium px-5 py-2.5 rounded-xl border border-white/20 hover:border-white/40 transition-colors">
+            Source Code
+          </a>
+        </div>
+      </div>
+
+      <!-- Interactive Feature Showcase -->
+      <div data-id="273" class="flex flex-col lg:flex-row gap-6 mb-14 reveal reveal-up delay-2">
+        <!-- Tabs -->
+        <div data-id="274" class="lg:w-64 flex-shrink-0 flex lg:flex-col overflow-x-auto lg:overflow-visible gap-1 pb-2 lg:pb-0">
+          <button data-id="275" class="feature-tab active whitespace-nowrap text-left text-sm font-medium" data-feature="delegation">
+            <span data-id="276" class="flex items-center gap-2">
+              <svg data-id="277" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect data-id="278" x="3" y="11" width="18" height="11" rx="2" ry="2"/><path data-id="279" d="M7 11V7a5 5 0 0110 0v4"/></svg>
+              Delegation Log
+            </span>
+          </button>
+          <button data-id="280" class="feature-tab whitespace-nowrap text-left text-sm font-medium" data-feature="signatures">
+            <span data-id="281" class="flex items-center gap-2">
+              <svg data-id="282" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="283" d="M17 3a2.85 2.85 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+              E-Signatures
+            </span>
+          </button>
+          <button data-id="284" class="feature-tab whitespace-nowrap text-left text-sm font-medium" data-feature="personnel">
+            <span data-id="285" class="flex items-center gap-2">
+              <svg data-id="286" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="287" d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4-4v-2"/><circle data-id="288" cx="9" cy="7" r="4"/><path data-id="289" d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+              Personnel & Training
+            </span>
+          </button>
+          <button data-id="290" class="feature-tab whitespace-nowrap text-left text-sm font-medium" data-feature="dashboard">
+            <span data-id="291" class="flex items-center gap-2">
+              <svg data-id="292" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect data-id="293" x="3" y="3" width="7" height="7"/><rect data-id="294" x="14" y="3" width="7" height="7"/><rect data-id="295" x="14" y="14" width="7" height="7"/><rect data-id="296" x="3" y="14" width="7" height="7"/></svg>
+              Dashboard
+            </span>
+          </button>
+          <button data-id="297" class="feature-tab whitespace-nowrap text-left text-sm font-medium" data-feature="audit">
+            <span data-id="298" class="flex items-center gap-2">
+              <svg data-id="299" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="300" d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline data-id="301" points="14 2 14 8 20 8"/></svg>
+              Audit Trail
+            </span>
+          </button>
+          <button data-id="302" class="feature-tab whitespace-nowrap text-left text-sm font-medium" data-feature="multiprotocol">
+            <span data-id="303" class="flex items-center gap-2">
+              <svg data-id="304" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle data-id="305" cx="12" cy="12" r="10"/><path data-id="306" d="M12 2a14.5 14.5 0 000 20 14.5 14.5 0 000-20"/><path data-id="307" d="M2 12h20"/></svg>
+              Multi-Protocol
+            </span>
+          </button>
+        </div>
+
+        <!-- Feature panels -->
+        <div data-id="308" class="flex-1 min-w-0">
+          <!-- Delegation Log -->
+          <div data-id="309" class="feature-panel active rounded-2xl p-6 md:p-8" data-panel="delegation" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);">
+            <h3 data-id="310" class="text-xl md:text-2xl font-bold text-white mb-3">Electronic Delegation Log</h3>
+            <p data-id="311" class="text-white/60 text-[15px] leading-relaxed mb-5">Digitize the entire delegation workflow — from task assignment to PI sign-off — with a system purpose-built for clinical trial sites.</p>
+            <ul data-id="312" class="space-y-2.5 mb-6">
+              <li data-id="313" class="flex items-start gap-2.5 text-white/70 text-[15px]"><svg data-id="314" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="315" d="M20 6L9 17l-5-5"/></svg>Role-based task delegation per protocol</li>
+              <li data-id="316" class="flex items-start gap-2.5 text-white/70 text-[15px]"><svg data-id="317" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="318" d="M20 6L9 17l-5-5"/></svg>Date-bound delegation periods with versioning</li>
+              <li data-id="319" class="flex items-start gap-2.5 text-white/70 text-[15px]"><svg data-id="320" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="321" d="M20 6L9 17l-5-5"/></svg>PI review and electronic approval workflows</li>
+              <li data-id="322" class="flex items-start gap-2.5 text-white/70 text-[15px]"><svg data-id="323" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="324" d="M20 6L9 17l-5-5"/></svg>Real-time status tracking across personnel</li>
+            </ul>
+            <!-- Mini UI Mockup -->
+            <div data-id="325" class="rounded-xl overflow-hidden" style="background:#0d1f3a;border:1px solid rgba(255,255,255,0.1);">
+              <div data-id="326" class="px-4 py-2.5 flex items-center gap-2 border-b border-white/10">
+                <div data-id="327" class="w-2 h-2 rounded-full bg-teal"></div>
+                <span data-id="328" class="text-xs text-white/50 font-medium">Delegation Log — PROT-2026-001</span>
+              </div>
+              <div data-id="329" class="p-4 space-y-2">
+                <div data-id="330" class="flex items-center gap-3 p-2.5 rounded-lg" style="background:rgba(255,255,255,0.04);">
+                  <div data-id="331" class="w-8 h-8 rounded-full bg-teal/20 flex items-center justify-center text-xs text-teal font-bold">JD</div>
+                  <div data-id="332" class="flex-1 min-w-0"><div data-id="333" class="text-xs text-white/80 font-medium">Dr. Jane Doe</div><div data-id="334" class="text-xs text-white/40">Informed Consent · Sub-Investigator</div></div>
+                  <span data-id="335" class="pill text-xs text-emerald-400" style="background:rgba(5,150,105,0.2);">Active</span>
+                </div>
+                <div data-id="336" class="flex items-center gap-3 p-2.5 rounded-lg" style="background:rgba(255,255,255,0.04);">
+                  <div data-id="337" class="w-8 h-8 rounded-full bg-amber/20 flex items-center justify-center text-xs text-amber font-bold">MS</div>
+                  <div data-id="338" class="flex-1 min-w-0"><div data-id="339" class="text-xs text-white/80 font-medium">Mark Smith, RN</div><div data-id="340" class="text-xs text-white/40">Vitals Collection · Study Coordinator</div></div>
+                  <span data-id="341" class="pill text-xs text-amber-400" style="background:rgba(245,158,11,0.2);">Pending Review</span>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <!-- Trust Indicators -->
-          <div data-id="54" class="flex flex-wrap gap-6 md:gap-10">
-            <div data-id="55" class="flex items-center gap-2">
-              <svg data-id="56" width="20" height="20" viewBox="0 0 24 24" fill="#0D9488" xmlns="http://www.w3.org/2000/svg"><path data-id="57" d="M12 2L3 7v6c0 5.25 3.75 10.05 9 11.25C17.25 23.05 21 18.25 21 13V7l-9-5zm-1 15l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg>
-              <span data-id="58" class="text-white/55 text-xs font-medium">ICH GCP Compliant</span>
+          <!-- E-Signatures -->
+          <div data-id="342" class="feature-panel rounded-2xl p-6 md:p-8" data-panel="signatures" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);">
+            <h3 data-id="343" class="text-xl md:text-2xl font-bold text-white mb-3">E-Signatures (21 CFR Part 11)</h3>
+            <p data-id="344" class="text-white/60 text-[15px] leading-relaxed mb-5">Compliant electronic signatures that meet federal requirements for electronic records — no wet ink needed.</p>
+            <ul data-id="345" class="space-y-2.5">
+              <li data-id="346" class="flex items-start gap-2.5 text-white/70 text-[15px]"><svg data-id="347" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="348" d="M20 6L9 17l-5-5"/></svg>Intent-based signing with unique credentials</li>
+              <li data-id="349" class="flex items-start gap-2.5 text-white/70 text-[15px]"><svg data-id="350" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="351" d="M20 6L9 17l-5-5"/></svg>Timestamped, non-repudiable signature records</li>
+              <li data-id="352" class="flex items-start gap-2.5 text-white/70 text-[15px]"><svg data-id="353" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="354" d="M20 6L9 17l-5-5"/></svg>Meaning-of-signature manifests per signer</li>
+              <li data-id="355" class="flex items-start gap-2.5 text-white/70 text-[15px]"><svg data-id="356" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="357" d="M20 6L9 17l-5-5"/></svg>Linked to complete audit trail</li>
+            </ul>
+          </div>
+
+          <!-- Personnel & Training -->
+          <div data-id="358" class="feature-panel rounded-2xl p-6 md:p-8" data-panel="personnel" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);">
+            <h3 data-id="359" class="text-xl md:text-2xl font-bold text-white mb-3">Personnel & Training Tracker</h3>
+            <p data-id="360" class="text-white/60 text-[15px] leading-relaxed mb-5">Track team members, roles, qualifications, and training status across protocols in a single unified view.</p>
+            <ul data-id="361" class="space-y-2.5">
+              <li data-id="362" class="flex items-start gap-2.5 text-white/70 text-[15px]"><svg data-id="363" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="364" d="M20 6L9 17l-5-5"/></svg>CV and credentials management</li>
+              <li data-id="365" class="flex items-start gap-2.5 text-white/70 text-[15px]"><svg data-id="366" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="367" d="M20 6L9 17l-5-5"/></svg>Training log with completion tracking</li>
+              <li data-id="368" class="flex items-start gap-2.5 text-white/70 text-[15px]"><svg data-id="369" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="370" d="M20 6L9 17l-5-5"/></svg>Role-based access control</li>
+            </ul>
+          </div>
+
+          <!-- Dashboard -->
+          <div data-id="371" class="feature-panel rounded-2xl p-6 md:p-8" data-panel="dashboard" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);">
+            <h3 data-id="372" class="text-xl md:text-2xl font-bold text-white mb-3">Real-Time Dashboard</h3>
+            <p data-id="373" class="text-white/60 text-[15px] leading-relaxed mb-5">At-a-glance visibility into delegation status, pending actions, expiring tasks, and team readiness.</p>
+            <ul data-id="374" class="space-y-2.5">
+              <li data-id="375" class="flex items-start gap-2.5 text-white/70 text-[15px]"><svg data-id="376" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="377" d="M20 6L9 17l-5-5"/></svg>Protocol-level summary metrics</li>
+              <li data-id="378" class="flex items-start gap-2.5 text-white/70 text-[15px]"><svg data-id="379" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="380" d="M20 6L9 17l-5-5"/></svg>Delegation coverage heat map</li>
+              <li data-id="381" class="flex items-start gap-2.5 text-white/70 text-[15px]"><svg data-id="382" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="383" d="M20 6L9 17l-5-5"/></svg>Pending action notifications</li>
+            </ul>
+          </div>
+
+          <!-- Audit Trail -->
+          <div data-id="384" class="feature-panel rounded-2xl p-6 md:p-8" data-panel="audit" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);">
+            <h3 data-id="385" class="text-xl md:text-2xl font-bold text-white mb-3">Immutable Audit Trail</h3>
+            <p data-id="386" class="text-white/60 text-[15px] leading-relaxed mb-5">Every action logged — who, what, when, and why. Designed for FDA inspection readiness from day one.</p>
+            <ul data-id="387" class="space-y-2.5">
+              <li data-id="388" class="flex items-start gap-2.5 text-white/70 text-[15px]"><svg data-id="389" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="390" d="M20 6L9 17l-5-5"/></svg>Tamper-evident chronological records</li>
+              <li data-id="391" class="flex items-start gap-2.5 text-white/70 text-[15px]"><svg data-id="392" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="393" d="M20 6L9 17l-5-5"/></svg>Reason-for-change logging</li>
+              <li data-id="394" class="flex items-start gap-2.5 text-white/70 text-[15px]"><svg data-id="395" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="396" d="M20 6L9 17l-5-5"/></svg>Export-ready for regulatory review</li>
+            </ul>
+          </div>
+
+          <!-- Multi-Protocol -->
+          <div data-id="397" class="feature-panel rounded-2xl p-6 md:p-8" data-panel="multiprotocol" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);">
+            <h3 data-id="398" class="text-xl md:text-2xl font-bold text-white mb-3">Multi-Protocol Support</h3>
+            <p data-id="399" class="text-white/60 text-[15px] leading-relaxed mb-5">Manage delegation logs across multiple active protocols simultaneously — without duplication or confusion.</p>
+            <ul data-id="400" class="space-y-2.5">
+              <li data-id="401" class="flex items-start gap-2.5 text-white/70 text-[15px]"><svg data-id="402" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="403" d="M20 6L9 17l-5-5"/></svg>Protocol-specific delegation views</li>
+              <li data-id="404" class="flex items-start gap-2.5 text-white/70 text-[15px]"><svg data-id="405" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="406" d="M20 6L9 17l-5-5"/></svg>Cross-protocol personnel overview</li>
+              <li data-id="407" class="flex items-start gap-2.5 text-white/70 text-[15px]"><svg data-id="408" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="409" d="M20 6L9 17l-5-5"/></svg>Unified training requirements</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Browser mockup -->
+      <div data-id="410" class="reveal reveal-scale delay-2 rounded-2xl overflow-hidden mb-14" style="border:1px solid rgba(255,255,255,0.1);box-shadow:0 32px 64px rgba(0,0,0,0.4);">
+        <!-- Browser chrome -->
+        <div data-id="411" class="flex items-center gap-3 px-5 py-3" style="background:#0d1f3a;border-bottom:1px solid rgba(255,255,255,0.08);">
+          <div data-id="412" class="flex gap-2">
+            <div data-id="413" class="browser-dot" style="background:#EF4444;"></div>
+            <div data-id="414" class="browser-dot" style="background:#F59E0B;"></div>
+            <div data-id="415" class="browser-dot" style="background:#22C55E;"></div>
+          </div>
+          <div data-id="416" class="flex-1 mx-4 py-1.5 px-4 rounded-lg text-xs text-white/40 font-mono" style="background:rgba(255,255,255,0.06);">
+            app.nokware-research.org/dashboard
+          </div>
+        </div>
+        <!-- Dashboard preview -->
+        <div data-id="417" class="flex" style="background:#0A1628;">
+          <!-- Sidebar -->
+          <div data-id="418" class="hidden md:flex flex-col w-48 p-4 gap-3 border-r border-white/[0.06]" style="background:#060f1d;">
+            <div data-id="419" class="flex items-center gap-2 mb-4">
+              <svg data-id="420" width="20" height="20" viewBox="0 0 40 40" fill="none"><polygon data-id="421" points="20,2 36,11 36,29 20,38 4,29 4,11" fill="#0D9488" opacity="0.8"/></svg>
+              <span data-id="422" class="text-white text-xs font-bold">e-Delegate</span>
             </div>
-            <div data-id="59" class="flex items-center gap-2">
-              <svg data-id="60" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" xmlns="http://www.w3.org/2000/svg"><path data-id="61" d="M9 12l2 2 4-4"/><rect data-id="62" x="3" y="3" width="18" height="18" rx="3"/></svg>
-              <span data-id="63" class="text-white/55 text-xs font-medium">21 CFR Part 11 Ready</span>
+            <div data-id="423" class="text-xs text-teal font-medium px-3 py-2 rounded-lg" style="background:rgba(13,148,136,0.15);">Dashboard</div>
+            <div data-id="424" class="text-xs text-white/40 px-3 py-2">Delegation Log</div>
+            <div data-id="425" class="text-xs text-white/40 px-3 py-2">Personnel</div>
+            <div data-id="426" class="text-xs text-white/40 px-3 py-2">Training</div>
+            <div data-id="427" class="text-xs text-white/40 px-3 py-2">Audit Trail</div>
+          </div>
+          <!-- Main content -->
+          <div data-id="428" class="flex-1 p-4 md:p-6">
+            <div data-id="429" class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+              <div data-id="430" class="rounded-xl p-3" style="background:rgba(13,148,136,0.12);border:1px solid rgba(13,148,136,0.2);">
+                <div data-id="431" class="text-xs text-white/40 mb-1">Active</div>
+                <div data-id="432" class="text-lg font-bold text-teal">24</div>
+              </div>
+              <div data-id="433" class="rounded-xl p-3" style="background:rgba(6,182,212,0.12);border:1px solid rgba(6,182,212,0.2);">
+                <div data-id="434" class="text-xs text-white/40 mb-1">Pending</div>
+                <div data-id="435" class="text-lg font-bold text-cyan">7</div>
+              </div>
+              <div data-id="436" class="rounded-xl p-3" style="background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.2);">
+                <div data-id="437" class="text-xs text-white/40 mb-1">Expiring</div>
+                <div data-id="438" class="text-lg font-bold text-amber">3</div>
+              </div>
+              <div data-id="439" class="rounded-xl p-3" style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.2);">
+                <div data-id="440" class="text-xs text-white/40 mb-1">Revoked</div>
+                <div data-id="441" class="text-lg font-bold text-red-400">1</div>
+              </div>
             </div>
-            <div data-id="64" class="flex items-center gap-2">
-              <svg data-id="65" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" xmlns="http://www.w3.org/2000/svg"><path data-id="66" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path data-id="67" d="M8 12l2 2 4-4"/></svg>
-              <span data-id="68" class="text-white/55 text-xs font-medium">100% Open Source</span>
+            <!-- Table preview -->
+            <div data-id="442" class="rounded-xl overflow-hidden" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);">
+              <div data-id="443" class="grid grid-cols-4 gap-2 p-3 text-xs text-white/30 font-semibold border-b border-white/[0.06]">
+                <span data-id="444">Personnel</span><span data-id="445" class="hidden md:block">Role</span><span data-id="446">Task</span><span data-id="447">Status</span>
+              </div>
+              <div data-id="448" class="grid grid-cols-4 gap-2 p-3 text-xs text-white/60 border-b border-white/[0.04]">
+                <span data-id="449">Dr. A. Patel</span><span data-id="450" class="hidden md:block">Sub-I</span><span data-id="451">Informed Consent</span><span data-id="452" class="text-emerald-400">Active</span>
+              </div>
+              <div data-id="453" class="grid grid-cols-4 gap-2 p-3 text-xs text-white/60 border-b border-white/[0.04]">
+                <span data-id="454">M. Johnson, RN</span><span data-id="455" class="hidden md:block">Coordinator</span><span data-id="456">Lab Collection</span><span data-id="457" class="text-amber-400">Pending</span>
+              </div>
+              <div data-id="458" class="grid grid-cols-4 gap-2 p-3 text-xs text-white/60">
+                <span data-id="459">T. Williams</span><span data-id="460" class="hidden md:block">Pharmacist</span><span data-id="461">IP Dispensing</span><span data-id="462" class="text-emerald-400">Active</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Scroll Cue -->
-      <div data-id="69" class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40">
-        <span data-id="70" class="text-[10px] font-semibold tracking-[0.25em] uppercase">Scroll</span>
-        <svg data-id="71" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="72" d="M12 5v14"/><path data-id="73" d="M19 12l-7 7-7-7"/></svg>
+      <!-- Compliance badges -->
+      <div data-id="463" class="flex flex-wrap justify-center gap-3 reveal reveal-up delay-3">
+        <span data-id="464" class="pill text-white/80 text-xs" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);">
+          <svg data-id="465" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="466" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          ICH GCP E6(R2)
+        </span>
+        <span data-id="467" class="pill text-white/80 text-xs" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);">
+          <svg data-id="468" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="469" d="M20 6L9 17l-5-5"/></svg>
+          21 CFR Part 11
+        </span>
+        <span data-id="470" class="pill text-white/80 text-xs" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);">
+          <svg data-id="471" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="472" d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline data-id="473" points="14 2 14 8 20 8"/></svg>
+          FDA Inspection Ready
+        </span>
+        <span data-id="474" class="pill text-white/80 text-xs" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);">
+          <svg data-id="475" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="476" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline data-id="477" points="15 3 21 3 21 9"/><line data-id="478" x1="10" y1="14" x2="21" y2="3"/></svg>
+          MIT License
+        </span>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- STATS BAR -->
-    <div data-id="74" class="bg-nokware-navy border-y border-white/10 py-10">
-      <div data-id="75" class="max-w-7xl mx-auto px-6">
-        <div data-id="76" class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <div data-id="77">
-            <div data-id="78" class="stat-number">14+</div>
-            <div data-id="79" class="text-white/50 text-sm font-medium mt-1">Years in Clinical Research</div>
+  <!-- ===================== DEVELOPERS SECTION ===================== -->
+  <section data-id="479" id="developers" class="py-20 md:py-24" style="background:#F8FAFC;">
+    <div data-id="480" class="max-w-6xl mx-auto px-5">
+      <div data-id="481" class="text-center mb-14 reveal reveal-up">
+        <div data-id="482" class="section-label mb-4" style="color:#7C3AED;">FOR DEVELOPERS</div>
+        <h2 data-id="483" id="dev-heading-h3d8" class="text-3xl md:text-4xl lg:text-5xl font-black text-navy leading-tight">
+          Built in <span data-id="484" class="grad-full">Public.</span> Open Forever.
+        </h2>
+      </div>
+
+      <!-- GitHub Card -->
+      <div data-id="485" class="card rounded-3xl p-6 md:p-8 mb-10 reveal reveal-up delay-1" style="border:1px solid rgba(13,148,136,0.15);">
+        <div data-id="486" class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div data-id="487">
+            <div data-id="488" class="flex items-center gap-3 mb-3">
+              <svg data-id="489" width="28" height="28" viewBox="0 0 24 24" fill="#1E293B"><path data-id="490" d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              <div data-id="491">
+                <div data-id="492" class="text-navy font-bold text-lg">nokware-research/e-delegate</div>
+                <div data-id="493" class="text-slate/60 text-sm">Open-source electronic delegation log for clinical trials</div>
+              </div>
+            </div>
+            <div data-id="494" class="flex flex-wrap gap-3 text-xs text-slate/60">
+              <span data-id="495" class="flex items-center gap-1"><span data-id="496" class="w-3 h-3 rounded-full bg-blue-500"></span>TypeScript</span>
+              <span data-id="497" class="flex items-center gap-1"><svg data-id="498" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon data-id="499" points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>MIT License</span>
+            </div>
           </div>
-          <div data-id="80">
-            <div data-id="81" class="stat-number">Phase I–IV</div>
-            <div data-id="82" class="text-white/50 text-sm font-medium mt-1">Trial Expertise</div>
+          <div data-id="500" class="flex flex-col gap-3 flex-shrink-0 w-full md:w-auto">
+            <a data-id="501" href="https://github.com/nokware-research/e-delegate" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 text-white text-sm font-semibold px-6 py-3 rounded-xl" style="background:linear-gradient(135deg,#0D9488,#06B6D4);">
+              View on GitHub →
+            </a>
+            <div data-id="502" class="flex items-center rounded-xl overflow-hidden" style="background:#0A1628;">
+              <code data-id="503" class="text-xs text-teal-400 font-mono px-4 py-2.5 flex-1 truncate">git clone https://github.com/nokware-research/e-delegate.git</code>
+            </div>
           </div>
-          <div data-id="83">
-            <div data-id="84" class="stat-number">5+</div>
-            <div data-id="85" class="text-white/50 text-sm font-medium mt-1">Therapeutic Areas</div>
+        </div>
+      </div>
+
+      <!-- Tech Stack -->
+      <div data-id="504" class="mb-10 reveal reveal-up delay-2">
+        <h3 data-id="505" class="text-center text-slate/50 text-sm font-semibold tracking-wider uppercase mb-6">Tech Stack</h3>
+        <div data-id="506" class="flex flex-wrap justify-center gap-3">
+          <span data-id="507" class="tech-pill inline-flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl text-sm font-medium text-slate shadow-sm" style="border:1px solid rgba(0,0,0,0.08);">
+            <svg data-id="508" width="16" height="16" viewBox="0 0 24 24" fill="#61DAFB"><circle data-id="509" cx="12" cy="12" r="2.5"/><ellipse data-id="510" cx="12" cy="12" rx="10" ry="4" fill="none" stroke="#61DAFB" stroke-width="1"/><ellipse data-id="511" cx="12" cy="12" rx="10" ry="4" fill="none" stroke="#61DAFB" stroke-width="1" transform="rotate(60 12 12)"/><ellipse data-id="512" cx="12" cy="12" rx="10" ry="4" fill="none" stroke="#61DAFB" stroke-width="1" transform="rotate(120 12 12)"/></svg>
+            React 18
+          </span>
+          <span data-id="513" class="tech-pill inline-flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl text-sm font-medium text-slate shadow-sm" style="border:1px solid rgba(0,0,0,0.08);">
+            <svg data-id="514" width="16" height="16" viewBox="0 0 24 24" fill="#3178C6"><rect data-id="515" width="24" height="24" rx="3" fill="#3178C6"/><text data-id="516" x="4" y="18" fill="white" font-size="14" font-weight="bold" font-family="sans-serif">TS</text></svg>
+            TypeScript
+          </span>
+          <span data-id="517" class="tech-pill inline-flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl text-sm font-medium text-slate shadow-sm" style="border:1px solid rgba(0,0,0,0.08);">
+            <svg data-id="518" width="16" height="16" viewBox="0 0 24 24"><polygon data-id="519" points="12,2 22,20 2,20" fill="#646CFF"/></svg>
+            Vite
+          </span>
+          <span data-id="520" class="tech-pill inline-flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl text-sm font-medium text-slate shadow-sm" style="border:1px solid rgba(0,0,0,0.08);">
+            <svg data-id="521" width="16" height="16" viewBox="0 0 24 24" fill="#EF4444"><circle data-id="522" cx="12" cy="12" r="10"/></svg>
+            TanStack Query
+          </span>
+          <span data-id="523" class="tech-pill inline-flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl text-sm font-medium text-slate shadow-sm" style="border:1px solid rgba(0,0,0,0.08);">
+            <svg data-id="524" width="16" height="16" viewBox="0 0 24 24" fill="#CA4245"><circle data-id="525" cx="12" cy="12" r="10"/></svg>
+            React Router v6
+          </span>
+          <span data-id="526" class="tech-pill inline-flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl text-sm font-medium text-slate shadow-sm" style="border:1px solid rgba(0,0,0,0.08);">
+            <svg data-id="527" width="16" height="16" viewBox="0 0 24 24" fill="#339933"><circle data-id="528" cx="12" cy="12" r="10"/><text data-id="529" x="5" y="16" fill="white" font-size="10" font-weight="bold" font-family="sans-serif">N</text></svg>
+            Node.js
+          </span>
+          <span data-id="530" class="tech-pill inline-flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl text-sm font-medium text-slate shadow-sm" style="border:1px solid rgba(0,0,0,0.08);">
+            <svg data-id="531" width="16" height="16" viewBox="0 0 24 24" fill="#336791"><circle data-id="532" cx="12" cy="12" r="10"/><text data-id="533" x="4" y="16" fill="white" font-size="10" font-weight="bold" font-family="sans-serif">PG</text></svg>
+            PostgreSQL
+          </span>
+          <span data-id="534" class="tech-pill inline-flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl text-sm font-medium text-slate shadow-sm" style="border:1px solid rgba(0,0,0,0.08);">
+            <svg data-id="535" width="16" height="16" viewBox="0 0 24 24" fill="#06B6D4"><circle data-id="536" cx="12" cy="12" r="10"/></svg>
+            Tailwind CSS
+          </span>
+          <span data-id="537" class="tech-pill inline-flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl text-sm font-medium text-slate shadow-sm" style="border:1px solid rgba(0,0,0,0.08);">
+            <svg data-id="538" width="16" height="16" viewBox="0 0 24 24" fill="#2088FF"><circle data-id="539" cx="12" cy="12" r="10"/></svg>
+            GitHub Actions CI
+          </span>
+          <span data-id="540" class="tech-pill inline-flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl text-sm font-medium text-slate shadow-sm" style="border:1px solid rgba(0,0,0,0.08);">
+            <svg data-id="541" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="542" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline data-id="543" points="15 3 21 3 21 9"/><line data-id="544" x1="10" y1="14" x2="21" y2="3"/></svg>
+            MIT License
+          </span>
+        </div>
+      </div>
+
+      <!-- Contribute callout -->
+      <div data-id="545" class="rounded-3xl p-8 md:p-10 reveal reveal-up delay-3" style="background:var(--navy);">
+        <div data-id="546" class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div data-id="547">
+            <h3 data-id="548" class="text-2xl md:text-3xl font-bold text-white mb-2">Join the mission.</h3>
+            <p data-id="549" class="text-white/60 text-[15px] leading-relaxed max-w-lg">
+              Nokware is built in public. We welcome contributors — developers, clinical researchers, designers, and advocates — who believe clinical trial technology should be open, equitable, and transparent.
+            </p>
           </div>
-          <div data-id="86">
-            <div data-id="87" class="stat-number">100%</div>
-            <div data-id="88" class="text-white/50 text-sm font-medium mt-1">Open Source &amp; Auditable</div>
+          <div data-id="550" class="flex items-center gap-3 flex-shrink-0">
+            <a data-id="551" href="https://github.com/nokware-research/e-delegate/issues" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-white text-sm font-medium px-5 py-3 rounded-xl border border-white/20 hover:border-white/40 transition-colors">
+              View Issues
+            </a>
+            <a data-id="552" href="https://github.com/nokware-research/e-delegate/pulls" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-white text-sm font-semibold px-5 py-3 rounded-xl" style="background:linear-gradient(135deg,#0D9488,#06B6D4);">
+              Open Pull Request
+            </a>
           </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- ═══════════════════════════════════════════════════════════════
-         SECTION 3: THE PROBLEM
-    ════════════════════════════════════════════════════════════════ -->
-    <section data-id="89" id="problem" class="bg-nokware-navy py-20 md:py-24">
-      <div data-id="90" class="max-w-7xl mx-auto px-4 md:px-6">
-        <!-- Section Header -->
-        <div data-id="91" class="text-center mb-14 md:mb-16">
-          <span data-id="92" class="text-nokware-gold text-xs font-bold tracking-[0.2em] uppercase">The Problem</span>
-          <h2 data-id="93" class="text-white font-extrabold text-3xl md:text-4xl lg:text-5xl mt-3 mb-4">Clinical Research Is <span data-id="94" class="text-red-400">Broken</span><br data-id="95" class="hidden md:block"/> in Plain Sight.</h2>
-          <p data-id="96" class="text-white/55 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-            The systems that power clinical trials were not built for the people they affect most. It's time for a fundamental rethink.
-          </p>
-        </div>
-
-        <!-- Problem Cards Grid -->
-        <div data-id="97" class="grid md:grid-cols-3 gap-6 mb-12">
-          <!-- Card 1: Exclusionary Design -->
-          <div data-id="98" class="card-red bg-white/5 border border-white/10 rounded-2xl p-8 card-hover">
-            <div data-id="99" class="w-12 h-12 rounded-xl icon-gradient-red flex items-center justify-center mb-5">
-              <svg data-id="100" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle data-id="101" cx="12" cy="12" r="10"/><line data-id="102" x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
-            </div>
-            <h3 data-id="103" class="text-white font-bold text-lg mb-3">Exclusionary Design</h3>
-            <p data-id="104" class="text-white/55 text-sm leading-relaxed">
-              Underrepresented communities are systematically excluded from clinical research through structural barriers — inaccessible consent forms, English-only platforms, and site-centric models that ignore real-world constraints.
-            </p>
-          </div>
-
-          <!-- Card 2: Fragmented Compliance -->
-          <div data-id="105" class="card-amber bg-white/5 border border-white/10 rounded-2xl p-8 card-hover">
-            <div data-id="106" class="w-12 h-12 rounded-xl icon-gradient-amber flex items-center justify-center mb-5">
-              <svg data-id="107" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="108" d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line data-id="109" x1="12" y1="9" x2="12" y2="13"/><line data-id="110" x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            </div>
-            <h3 data-id="111" class="text-white font-bold text-lg mb-3">Fragmented Compliance</h3>
-            <p data-id="112" class="text-white/55 text-sm leading-relaxed">
-              Delegation logs live in paper binders. Training records sit in siloed spreadsheets. Protocol amendments get lost between email threads. This fragmentation slows FDA submissions and invites costly audit findings.
-            </p>
-          </div>
-
-          <!-- Card 3: Opacity Over Trust -->
-          <div data-id="113" class="card-purple bg-white/5 border border-white/10 rounded-2xl p-8 card-hover">
-            <div data-id="114" class="w-12 h-12 rounded-xl icon-gradient-purple flex items-center justify-center mb-5">
-              <svg data-id="115" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect data-id="116" x="3" y="11" width="18" height="11" rx="2"/><path data-id="117" d="M7 11V7a5 5 0 0110 0v4"/></svg>
-            </div>
-            <h3 data-id="118" class="text-white font-bold text-lg mb-3">Opacity Over Trust</h3>
-            <p data-id="119" class="text-white/55 text-sm leading-relaxed">
-              Black-box proprietary EDC platforms lock researchers into vendor ecosystems, obscure data models, and make independent auditing nearly impossible — eroding the trust that ethical research depends on.
-            </p>
-          </div>
-        </div>
-
-        <!-- Pull Quote -->
-        <div data-id="120" class="bg-nokware-teal/10 border border-nokware-teal/30 rounded-2xl p-8 md:p-10">
-          <p data-id="121" class="text-white text-lg md:text-xl italic leading-relaxed text-center max-w-3xl mx-auto">
-            "Clinical trials must earn trust — from participants, regulators, and the public. That trust starts with technology that is transparent by design."
-          </p>
-          <p data-id="122" class="text-nokware-teal text-sm font-medium text-center mt-4">— Nokware Research Solutions</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════════════
-         SECTION 4: OUR APPROACH
-    ════════════════════════════════════════════════════════════════ -->
-    <section data-id="123" id="approach" class="bg-nokware-light py-20 md:py-24">
-      <div data-id="124" class="max-w-7xl mx-auto px-4 md:px-6">
-        <!-- Section Header -->
-        <div data-id="125" class="text-center mb-14 md:mb-16">
-          <span data-id="126" class="text-nokware-teal text-xs font-bold tracking-[0.2em] uppercase">Our Approach</span>
-          <h2 data-id="127" class="text-nokware-navy font-extrabold text-3xl md:text-4xl lg:text-5xl mt-3 mb-4"><span data-id="128" class="gradient-text">Equity-First.</span> Open by Default.<br data-id="129" class="hidden md:block"/> Built to Last.</h2>
-          <p data-id="130" class="text-nokware-muted max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-            We don't retrofit ethics onto finished software. We architect for equity, compliance, and transparency from the first line of code.
-          </p>
-        </div>
-
-        <!-- Approach Cards Grid -->
-        <div data-id="131" class="grid md:grid-cols-2 gap-6 mb-12">
-          <!-- Card 1 -->
-          <div data-id="132" class="card-teal-top bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex gap-6">
-            <div data-id="133" class="shrink-0 w-14 h-14 rounded-xl icon-gradient-teal flex items-center justify-center">
-              <svg data-id="134" width="28" height="28" viewBox="0 0 32 36" fill="none"><path data-id="135" d="M16 0L30.5 8.5V27.5L16 36L1.5 27.5V8.5L16 0Z" fill="#0D9488" opacity="0.85"/><polygon data-id="136" points="16,10 22,14 22,22 16,26 10,22 10,14" fill="white" opacity="0.9"/></svg>
-            </div>
-            <div data-id="137">
-              <h3 data-id="138" class="text-nokware-slate font-bold text-lg mb-2">Participant-Centered by Architecture</h3>
-              <p data-id="139" class="text-nokware-muted text-sm leading-relaxed">
-                Consent workflows designed for comprehension, not just signature capture. Multi-language support, remote participation pathways, and accessibility-first interfaces ensure every participant is respected.
-              </p>
-            </div>
-          </div>
-
-          <!-- Card 2 -->
-          <div data-id="140" class="card-teal-top bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex gap-6">
-            <div data-id="141" class="shrink-0 w-14 h-14 rounded-xl icon-gradient-teal flex items-center justify-center">
-              <svg data-id="142" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="143" d="M12 2L3 7v6c0 5.25 3.75 10.05 9 11.25C17.25 23.05 21 18.25 21 13V7l-9-5z"/><path data-id="144" d="M9 12l2 2 4-4"/></svg>
-            </div>
-            <div data-id="145">
-              <h3 data-id="146" class="text-nokware-slate font-bold text-lg mb-2">Compliance Without Compromise</h3>
-              <p data-id="147" class="text-nokware-muted text-sm leading-relaxed">
-                ICH GCP E6(R2) and 21 CFR Part 11 aren't afterthoughts — they are structural principles. Electronic signatures, audit trails, and role-based access are built into the foundation, not bolted on.
-              </p>
-            </div>
-          </div>
-
-          <!-- Card 3 -->
-          <div data-id="148" class="card-teal-top bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex gap-6">
-            <div data-id="149" class="shrink-0 w-14 h-14 rounded-xl icon-gradient-teal flex items-center justify-center">
-              <svg data-id="150" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle data-id="151" cx="12" cy="12" r="10"/><path data-id="152" d="M9 12l2 2 4-4"/></svg>
-            </div>
-            <div data-id="153">
-              <h3 data-id="154" class="text-nokware-slate font-bold text-lg mb-2">Radical Transparency</h3>
-              <p data-id="155" class="text-nokware-muted text-sm leading-relaxed">
-                Public source code. Documented data models. Auditable decision logic. Every design choice is visible, reviewable, and accountable — because trust is earned through openness, not marketing.
-              </p>
-            </div>
-          </div>
-
-          <!-- Card 4 -->
-          <div data-id="156" class="card-teal-top bg-white rounded-2xl p-8 border border-gray-100 shadow-sm card-hover flex gap-6">
-            <div data-id="157" class="shrink-0 w-14 h-14 rounded-xl icon-gradient-teal flex items-center justify-center">
-              <svg data-id="158" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle data-id="159" cx="12" cy="12" r="10"/><line data-id="160" x1="2" y1="12" x2="22" y2="12"/><path data-id="161" d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-            </div>
-            <div data-id="162">
-              <h3 data-id="163" class="text-nokware-slate font-bold text-lg mb-2">Open Science as Infrastructure</h3>
-              <p data-id="164" class="text-nokware-muted text-sm leading-relaxed">
-                MIT licensed. No vendor lock-in. No per-seat pricing that prices out under-resourced institutions. Global research teams deserve tools they can inspect, modify, and own — forever.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Mission Statement Block -->
-        <div data-id="165" class="bg-gradient-to-br from-nokware-navy via-[#0f2d4a] to-[#134e4a] rounded-3xl p-10 md:p-14 text-center">
-          <span data-id="166" class="inline-flex bg-nokware-teal/20 text-nokware-teal text-xs font-semibold tracking-wide uppercase px-4 py-1.5 rounded-full mb-6">Our Mission</span>
-          <p data-id="167" class="text-white text-lg md:text-xl lg:text-2xl italic leading-relaxed max-w-4xl mx-auto">
-            "To make clinical research more equitable, more trustworthy, and more efficient by building open-source technology that centers the human beings at the heart of every trial — and gives the research community tools they can actually own."
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════════════
-         SECTION 5: e-DELEGATE
-    ════════════════════════════════════════════════════════════════ -->
-    <section data-id="168" id="edelegate" class="bg-white py-20 md:py-24">
-      <div data-id="169" class="max-w-7xl mx-auto px-4 md:px-6">
-        <!-- Section Header -->
-        <div data-id="170" class="text-center mb-14 md:mb-16">
-          <span data-id="171" class="text-nokware-gold text-xs font-bold tracking-[0.2em] uppercase">Flagship Product</span>
-          <h2 data-id="172" class="gradient-text font-extrabold text-3xl md:text-4xl lg:text-5xl mt-3 mb-4">e-Delegate</h2>
-          <p data-id="173" class="text-nokware-muted max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-            The open-source delegation management system built to replace paper binders with structured, auditable, regulation-ready electronic records.
-          </p>
-        </div>
-
-        <!-- Live App CTA Banner -->
-        <div data-id="174" class="bg-gradient-to-r from-nokware-teal/10 to-nokware-navy/10 border border-nokware-teal/30 rounded-2xl p-6 mb-10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div data-id="175" class="flex items-center gap-4">
-            <div data-id="176" class="w-10 h-10 bg-nokware-teal rounded-xl flex items-center justify-center shrink-0">
-              <svg data-id="177" width="20" height="20" viewBox="0 0 20 20" fill="none"><path data-id="178" d="M3 5C3 3.9 3.9 3 5 3H15C16.1 3 17 3.9 17 5V13C17 14.1 16.1 15 15 15H5C3.9 15 3 14.1 3 13V5Z" stroke="white" stroke-width="1.5"/><path data-id="179" d="M7 17H13M10 15V17" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle data-id="180" cx="10" cy="9" r="2.5" stroke="white" stroke-width="1.5"/></svg>
-            </div>
-            <div data-id="181">
-              <div data-id="182" class="font-bold text-nokware-navy text-base">e-Delegate is live and running</div>
-              <div data-id="183" class="text-nokware-muted text-sm">Full-featured demo with delegation logs, e-signatures, training tracking, and audit trail</div>
-            </div>
-          </div>
-          <div data-id="184" class="flex gap-3 shrink-0">
-            <a data-id="185" href="https://e-delegate.qrx-jay.workers.dev" target="_blank" rel="noopener noreferrer"
-               class="inline-flex items-center gap-2 bg-nokware-teal text-white font-bold px-6 py-3 rounded-lg hover:bg-teal-600 transition-colors text-sm">
-              Launch App
-              <svg data-id="186" width="14" height="14" viewBox="0 0 14 14" fill="none"><path data-id="187" d="M2 2h4v1.5H3.5v7h7V9H12v4H2V2zm5 0h5v5h-1.5V4.06L6.03 8.53 4.97 7.47 9.44 3H7V2z" fill="currentColor"/></svg>
-            </a>
-            <a data-id="188" href="https://github.com/nokware-research/e-delegate" target="_blank" rel="noopener noreferrer"
-               class="inline-flex items-center gap-2 border border-nokware-navy/20 text-nokware-navy font-semibold px-5 py-3 rounded-lg hover:bg-nokware-navy/5 transition-colors text-sm">
-              Source Code
-            </a>
-          </div>
-        </div>
-
-        <!-- Feature Cards Grid -->
-        <div data-id="189" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          <!-- Feature 1 -->
-          <div data-id="190" class="card-teal-top border border-gray-100 rounded-2xl p-7 card-hover">
-            <div data-id="191" class="w-10 h-10 rounded-lg icon-gradient-teal flex items-center justify-center mb-4">
-              <svg data-id="192" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line data-id="193" x1="8" y1="6" x2="21" y2="6"/><line data-id="194" x1="8" y1="12" x2="21" y2="12"/><line data-id="195" x1="8" y1="18" x2="21" y2="18"/><line data-id="196" x1="3" y1="6" x2="3.01" y2="6"/><line data-id="197" x1="3" y1="12" x2="3.01" y2="12"/><line data-id="198" x1="3" y1="18" x2="3.01" y2="18"/></svg>
-            </div>
-            <h4 data-id="199" class="text-nokware-slate font-bold text-base mb-1.5">Digital Delegation Logs</h4>
-            <p data-id="200" class="text-nokware-muted text-sm leading-relaxed">Versioned electronic records capturing who, what, when, and which protocol — eliminating paper trail ambiguity.</p>
-          </div>
-
-          <!-- Feature 2 -->
-          <div data-id="201" class="card-teal-top border border-gray-100 rounded-2xl p-7 card-hover">
-            <div data-id="202" class="w-10 h-10 rounded-lg icon-gradient-teal flex items-center justify-center mb-4">
-              <svg data-id="203" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon data-id="204" points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            </div>
-            <h4 data-id="205" class="text-nokware-slate font-bold text-base mb-1.5">21 CFR Part 11 Signatures</h4>
-            <p data-id="206" class="text-nokware-muted text-sm leading-relaxed">Identity verification, meaning-of-signature capture, and tamper-evident records meeting FDA electronic signature requirements.</p>
-          </div>
-
-          <!-- Feature 3 -->
-          <div data-id="207" class="card-teal-top border border-gray-100 rounded-2xl p-7 card-hover">
-            <div data-id="208" class="w-10 h-10 rounded-lg icon-gradient-teal flex items-center justify-center mb-4">
-              <svg data-id="209" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="210" d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle data-id="211" cx="12" cy="7" r="4"/></svg>
-            </div>
-            <h4 data-id="212" class="text-nokware-slate font-bold text-base mb-1.5">Role-Based Access Control</h4>
-            <p data-id="213" class="text-nokware-muted text-sm leading-relaxed">Granular permissions for PIs, sub-investigators, coordinators, monitors, and sponsors — each sees only what they should.</p>
-          </div>
-
-          <!-- Feature 4 -->
-          <div data-id="214" class="card-teal-top border border-gray-100 rounded-2xl p-7 card-hover">
-            <div data-id="215" class="w-10 h-10 rounded-lg icon-gradient-teal flex items-center justify-center mb-4">
-              <svg data-id="216" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="217" d="M12 2L3 7v6c0 5.25 3.75 10.05 9 11.25C17.25 23.05 21 18.25 21 13V7l-9-5z"/><path data-id="218" d="M9 12l2 2 4-4"/></svg>
-            </div>
-            <h4 data-id="219" class="text-nokware-slate font-bold text-base mb-1.5">GCP Training Tracking</h4>
-            <p data-id="220" class="text-nokware-muted text-sm leading-relaxed">Personnel certifications and training records linked directly to delegation entries, keeping compliance current and auditable.</p>
-          </div>
-
-          <!-- Feature 5 -->
-          <div data-id="221" class="card-teal-top border border-gray-100 rounded-2xl p-7 card-hover">
-            <div data-id="222" class="w-10 h-10 rounded-lg icon-gradient-teal flex items-center justify-center mb-4">
-              <svg data-id="223" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="224" d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline data-id="225" points="14 2 14 8 20 8"/><line data-id="226" x1="16" y1="13" x2="8" y2="13"/><line data-id="227" x1="16" y1="17" x2="8" y2="17"/><polyline data-id="228" points="10 9 9 9 8 9"/></svg>
-            </div>
-            <h4 data-id="229" class="text-nokware-slate font-bold text-base mb-1.5">Immutable Audit Trail</h4>
-            <p data-id="230" class="text-nokware-muted text-sm leading-relaxed">Every action logged with timestamp, user identity, and change delta — producing an FDA-ready audit trail from day one.</p>
-          </div>
-
-          <!-- Feature 6 -->
-          <div data-id="231" class="card-teal-top border border-gray-100 rounded-2xl p-7 card-hover">
-            <div data-id="232" class="w-10 h-10 rounded-lg icon-gradient-teal flex items-center justify-center mb-4">
-              <svg data-id="233" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="234" d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline data-id="235" points="13 2 13 9 20 9"/></svg>
-            </div>
-            <h4 data-id="236" class="text-nokware-slate font-bold text-base mb-1.5">Multi-Protocol Support</h4>
-            <p data-id="237" class="text-nokware-muted text-sm leading-relaxed">Manage multiple protocols per site with version-controlled amendments, so your delegation records scale with your research.</p>
-          </div>
-        </div>
-
-        <!-- Browser UI Mockup -->
-        <div data-id="238" class="mb-10 rounded-2xl overflow-hidden border border-gray-200 shadow-xl">
-          <!-- Browser chrome bar -->
-          <div data-id="239" class="bg-gray-100 border-b border-gray-200 px-4 py-2.5 flex items-center gap-3">
-            <div data-id="240" class="flex gap-1.5">
-              <div data-id="241" class="w-3 h-3 rounded-full bg-red-400"></div>
-              <div data-id="242" class="w-3 h-3 rounded-full bg-amber-400"></div>
-              <div data-id="243" class="w-3 h-3 rounded-full bg-green-400"></div>
-            </div>
-            <div data-id="244" class="flex-1 bg-white rounded-md px-3 py-1 text-xs text-gray-400 font-mono border border-gray-200">
-              e-delegate.qrx-jay.workers.dev/dashboard
-            </div>
-            <div data-id="245" class="flex items-center gap-1">
-              <svg data-id="246" width="14" height="14" viewBox="0 0 14 14" fill="none"><path data-id="247" d="M7 1L8.2 4.6H12L9 6.9L10.2 10.5L7 8.2L3.8 10.5L5 6.9L2 4.6H5.8L7 1Z" fill="#0D9488"/></svg>
-              <span data-id="248" class="text-xs text-green-600 font-medium">Secure</span>
-            </div>
-          </div>
-          <!-- App UI mockup content -->
-          <div data-id="249" class="bg-gray-50 flex" style="height:340px; overflow:hidden;">
-            <!-- Sidebar -->
-            <div data-id="250" class="w-48 bg-nokware-navy flex-shrink-0 flex flex-col py-4 px-3 gap-1" style="background:#0A1628;">
-              <!-- Logo -->
-              <div data-id="251" class="flex items-center gap-2 px-2 mb-4">
-                <div data-id="252" class="w-6 h-6 rounded bg-nokware-teal flex items-center justify-center">
-                  <svg data-id="253" width="12" height="12" viewBox="0 0 12 12" fill="none"><path data-id="254" d="M6 1L10 3.5V8.5L6 11L2 8.5V3.5L6 1Z" fill="white" opacity="0.9"/></svg>
-                </div>
-                <span data-id="255" class="text-white text-xs font-bold">e-Delegate</span>
+  <!-- ===================== ABOUT / FOUNDER SECTION ===================== -->
+  <section data-id="553" id="about" class="py-20 md:py-24" style="background:var(--navy);">
+    <div data-id="554" class="max-w-6xl mx-auto px-5">
+      <div data-id="555" class="flex flex-col lg:flex-row gap-10 lg:gap-16">
+        <!-- LEFT — Founder card -->
+        <div data-id="556" class="lg:w-[420px] flex-shrink-0 reveal reveal-left">
+          <div data-id="557" class="rounded-3xl p-7 md:p-8" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);">
+            <!-- Avatar -->
+            <div data-id="558" class="flex items-center gap-4 mb-6">
+              <div data-id="559" class="w-20 h-20 rounded-full flex items-center justify-center text-white text-3xl font-bold flex-shrink-0" style="background:linear-gradient(135deg,#0D9488,#7C3AED);">
+                KQ
               </div>
-              <!-- Nav items -->
-              <div data-id="256" class="bg-nokware-teal rounded-lg px-3 py-2 flex items-center gap-2" style="background:#0D9488;">
-                <svg data-id="257" width="14" height="14" viewBox="0 0 14 14" fill="white"><rect data-id="258" x="1" y="1" width="5.5" height="5.5" rx="1" fill="white"/><rect data-id="259" x="7.5" y="1" width="5.5" height="5.5" rx="1" fill="white"/><rect data-id="260" x="1" y="7.5" width="5.5" height="5.5" rx="1" fill="white"/><rect data-id="261" x="7.5" y="7.5" width="5.5" height="5.5" rx="1" fill="white"/></svg>
-                <span data-id="262" class="text-white text-xs font-medium">Dashboard</span>
-              </div>
-              <div data-id="263" class="px-3 py-2 flex items-center gap-2 opacity-60">
-                <svg data-id="264" width="14" height="14" viewBox="0 0 14 14" fill="none"><rect data-id="265" x="1" y="1" width="12" height="12" rx="1.5" stroke="white" stroke-width="1.2"/><path data-id="266" d="M3 4H11M3 7H9M3 10H7" stroke="white" stroke-width="1.2" stroke-linecap="round"/></svg>
-                <span data-id="267" class="text-white text-xs">Delegation Log</span>
-              </div>
-              <div data-id="268" class="px-3 py-2 flex items-center gap-2 opacity-60">
-                <svg data-id="269" width="14" height="14" viewBox="0 0 14 14" fill="none"><circle data-id="270" cx="7" cy="5" r="3" stroke="white" stroke-width="1.2"/><path data-id="271" d="M1 13C1 10.8 3.7 9 7 9C10.3 9 13 10.8 13 13" stroke="white" stroke-width="1.2" stroke-linecap="round"/></svg>
-                <span data-id="272" class="text-white text-xs">Personnel</span>
-              </div>
-              <div data-id="273" class="px-3 py-2 flex items-center gap-2 opacity-60">
-                <svg data-id="274" width="14" height="14" viewBox="0 0 14 14" fill="none"><circle data-id="275" cx="7" cy="7" r="5.5" stroke="white" stroke-width="1.2"/><path data-id="276" d="M7 4V7L9 9" stroke="white" stroke-width="1.2" stroke-linecap="round"/></svg>
-                <span data-id="277" class="text-white text-xs">Training</span>
-              </div>
-              <div data-id="278" class="px-3 py-2 flex items-center gap-2 opacity-60">
-                <svg data-id="279" width="14" height="14" viewBox="0 0 14 14" fill="none"><path data-id="280" d="M1 3H13M1 7H13M1 11H8" stroke="white" stroke-width="1.2" stroke-linecap="round"/></svg>
-                <span data-id="281" class="text-white text-xs">Audit Trail</span>
-              </div>
-              <!-- Bottom user -->
-              <div data-id="282" class="mt-auto pt-4 border-t border-white/10 flex items-center gap-2 px-2">
-                <div data-id="283" class="w-6 h-6 rounded-full bg-nokware-teal flex items-center justify-center text-white text-xs font-bold" style="background:#0D9488;">KQ</div>
-                <div data-id="284">
-                  <div data-id="285" class="text-white text-xs font-medium leading-none">Kojo Q.</div>
-                  <div data-id="286" class="text-white/40 text-xs">CRA</div>
-                </div>
+              <div data-id="560">
+                <h3 data-id="561" class="text-white text-xl font-bold leading-tight">Kojo A. Quansah Jr., PharmD</h3>
+                <p data-id="562" class="text-teal text-sm font-medium mt-0.5">Senior CRA · Site Director · Founder</p>
               </div>
             </div>
-            <!-- Main content -->
-            <div data-id="287" class="flex-1 flex flex-col overflow-hidden">
-              <!-- Top bar -->
-              <div data-id="288" class="bg-white border-b border-gray-100 px-4 py-2.5 flex items-center justify-between">
-                <span data-id="289" class="text-xs font-semibold text-gray-700">Dashboard</span>
-                <div data-id="290" class="flex items-center gap-2">
-                  <div data-id="291" class="relative">
-                    <div data-id="292" class="w-4 h-4 rounded bg-red-500 absolute -top-1 -right-1 flex items-center justify-center">
-                      <span data-id="293" class="text-white text-xs leading-none" style="font-size:8px;">2</span>
-                    </div>
-                    <svg data-id="294" width="16" height="16" viewBox="0 0 16 16" fill="none"><path data-id="295" d="M8 2C8 2 4 4.5 4 8C4 10.2 5.8 12 8 12C10.2 12 12 10.2 12 8C12 4.5 8 2 8 2Z" stroke="#64748B" stroke-width="1.2"/><path data-id="296" d="M6 12.5C6.4 13.4 7.1 14 8 14C8.9 14 9.6 13.4 10 12.5" stroke="#64748B" stroke-width="1.2" stroke-linecap="round"/></svg>
-                  </div>
-                </div>
-              </div>
-              <!-- Dashboard stats -->
-              <div data-id="297" class="p-4 overflow-auto flex-1">
-                <div data-id="298" class="grid grid-cols-4 gap-3 mb-4">
-                  <div data-id="299" class="bg-white rounded-lg p-3 border border-gray-100 shadow-sm">
-                    <div data-id="300" class="text-xs text-gray-400 mb-1">Active Protocols</div>
-                    <div data-id="301" class="text-xl font-extrabold text-nokware-navy">2</div>
-                  </div>
-                  <div data-id="302" class="bg-white rounded-lg p-3 border border-gray-100 shadow-sm">
-                    <div data-id="303" class="text-xs text-gray-400 mb-1">Delegated Staff</div>
-                    <div data-id="304" class="text-xl font-extrabold text-nokware-navy">5</div>
-                  </div>
-                  <div data-id="305" class="bg-white rounded-lg p-3 border border-gray-100 shadow-sm">
-                    <div data-id="306" class="text-xs text-gray-400 mb-1">Training Compliance</div>
-                    <div data-id="307" class="text-xl font-extrabold text-amber-500">83%</div>
-                  </div>
-                  <div data-id="308" class="bg-white rounded-lg p-3 border border-gray-100 shadow-sm">
-                    <div data-id="309" class="text-xs text-gray-400 mb-1">Pending Signatures</div>
-                    <div data-id="310" class="flex items-center gap-1"><span data-id="311" class="text-xl font-extrabold text-red-500">2</span><span data-id="312" class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span></div>
-                  </div>
-                </div>
-                <!-- Delegation table preview -->
-                <div data-id="313" class="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden">
-                  <div data-id="314" class="px-3 py-2 border-b border-gray-50 flex items-center justify-between">
-                    <span data-id="315" class="text-xs font-semibold text-gray-600">Recent Delegations</span>
-                    <span data-id="316" class="text-xs text-nokware-teal font-medium cursor-pointer">View all →</span>
-                  </div>
-                  <table data-id="317" class="w-full text-xs">
-                    <thead data-id="318"><tr data-id="319" class="bg-gray-50"><th data-id="320" class="text-left px-3 py-1.5 text-gray-400 font-medium">Protocol</th><th data-id="321" class="text-left px-3 py-1.5 text-gray-400 font-medium">Personnel</th><th data-id="322" class="text-left px-3 py-1.5 text-gray-400 font-medium">PI Sig</th><th data-id="323" class="text-left px-3 py-1.5 text-gray-400 font-medium">Status</th></tr></thead>
-                    <tbody data-id="324">
-                      <tr data-id="325" class="border-t border-gray-50"><td data-id="326" class="px-3 py-1.5"><span data-id="327" class="bg-teal-50 text-teal-700 rounded px-1.5 py-0.5 font-mono" style="font-size:10px;">NKW-2024-001</span></td><td data-id="328" class="px-3 py-1.5 font-medium text-gray-700">Dr. J. Okafor</td><td data-id="329" class="px-3 py-1.5"><span data-id="330" class="text-green-500">✓ Signed</span></td><td data-id="331" class="px-3 py-1.5"><span data-id="332" class="bg-green-50 text-green-700 rounded-full px-2 py-0.5" style="font-size:10px;">Active</span></td></tr>
-                      <tr data-id="333" class="border-t border-gray-50"><td data-id="334" class="px-3 py-1.5"><span data-id="335" class="bg-teal-50 text-teal-700 rounded px-1.5 py-0.5 font-mono" style="font-size:10px;">NKW-2024-002</span></td><td data-id="336" class="px-3 py-1.5 font-medium text-gray-700">P. Nair, RN</td><td data-id="337" class="px-3 py-1.5"><span data-id="338" class="text-amber-500">⏳ Pending</span></td><td data-id="339" class="px-3 py-1.5"><span data-id="340" class="bg-amber-50 text-amber-700 rounded-full px-2 py-0.5" style="font-size:10px;">Pending</span></td></tr>
-                      <tr data-id="341" class="border-t border-gray-50"><td data-id="342" class="px-3 py-1.5"><span data-id="343" class="bg-teal-50 text-teal-700 rounded px-1.5 py-0.5 font-mono" style="font-size:10px;">NKW-2024-001</span></td><td data-id="344" class="px-3 py-1.5 font-medium text-gray-700">M. Santos, PharmD</td><td data-id="345" class="px-3 py-1.5"><span data-id="346" class="text-green-500">✓ Signed</span></td><td data-id="347" class="px-3 py-1.5"><span data-id="348" class="bg-red-50 text-red-600 rounded-full px-2 py-0.5 font-bold" style="font-size:10px;">⚠ Training Exp.</span></td></tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <!-- Compliance Bar -->
-        <div data-id="349" class="bg-gradient-to-br from-nokware-navy via-[#0f2d4a] to-[#134e4a] rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 md:gap-12">
-          <div data-id="350" class="flex-1 text-center md:text-left">
-            <h3 data-id="351" class="text-white font-bold text-xl md:text-2xl mb-2">Built for Regulatory Confidence</h3>
-            <p data-id="352" class="text-white/55 text-sm leading-relaxed">Every feature in e-Delegate is designed around the regulatory frameworks that govern clinical research.</p>
-          </div>
-          <div data-id="353" class="flex flex-wrap justify-center gap-6 md:gap-8 shrink-0">
-            <div data-id="354" class="text-center">
-              <div data-id="355" class="text-nokware-teal font-extrabold text-2xl">ICH GCP</div>
-              <div data-id="356" class="text-nokware-teal/70 text-xs font-medium mt-1">E6(R2) Aligned</div>
-            </div>
-            <div data-id="357" class="w-px h-12 bg-white/15 hidden md:block"></div>
-            <div data-id="358" class="text-center">
-              <div data-id="359" class="text-nokware-gold font-extrabold text-2xl">21 CFR</div>
-              <div data-id="360" class="text-nokware-gold/70 text-xs font-medium mt-1">Part 11 Ready</div>
-            </div>
-            <div data-id="361" class="w-px h-12 bg-white/15 hidden md:block"></div>
-            <div data-id="362" class="text-center">
-              <div data-id="363" class="text-white font-extrabold text-2xl">Open</div>
-              <div data-id="364" class="text-white/50 text-xs font-medium mt-1">Source & Auditable</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════════════
-         SECTION 6: DEVELOPERS
-    ════════════════════════════════════════════════════════════════ -->
-    <section data-id="365" id="developers" class="bg-nokware-navy py-20 md:py-24">
-      <div data-id="366" class="max-w-7xl mx-auto px-4 md:px-6">
-        <!-- Section Header -->
-        <div data-id="367" class="text-center mb-14 md:mb-16">
-          <span data-id="368" class="text-nokware-teal text-xs font-bold tracking-[0.2em] uppercase">Open Source</span>
-          <h2 data-id="369" class="text-white font-extrabold text-3xl md:text-4xl lg:text-5xl mt-3 mb-4"><span data-id="370" class="gradient-text">Built in Public.</span><br data-id="371" class="hidden sm:block"/> Fork It. Improve It.</h2>
-          <p data-id="372" class="text-white/55 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-            This isn't open-washing. Our source code, roadmap, and decision-making are public. This is an open invitation to build better clinical trial infrastructure together.
-          </p>
-        </div>
-
-        <!-- Developer Cards -->
-        <div data-id="373" class="grid md:grid-cols-2 gap-6 mb-10">
-          <!-- GitHub Repo Card -->
-          <div data-id="374" class="bg-white/5 border border-white/10 border-l-2 border-l-nokware-teal rounded-2xl p-8 card-hover">
-            <!-- GitHub Logo -->
-            <svg data-id="375" width="40" height="40" viewBox="0 0 24 24" fill="white" class="mb-5"><path data-id="376" d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-            <h3 data-id="377" class="text-white font-bold text-xl mb-1">nokware-research / e-delegate</h3>
-            <p data-id="378" class="text-nokware-teal text-sm mb-4">github.com/nokware-research/e-delegate</p>
-            <p data-id="379" class="text-white/55 text-sm leading-relaxed mb-6">
-              The complete e-Delegate platform — delegation log management, electronic signatures, audit trails, and role-based access. Built with React 18, TypeScript, and Node.js — designed for research sites of any size.
-            </p>
-            <a data-id="380" href="https://github.com/nokware-research/e-delegate" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-white text-nokware-navy font-semibold text-sm px-6 py-3 rounded-lg hover:bg-nokware-teal hover:text-white transition-colors">
-              <svg data-id="381" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="382" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline data-id="383" points="15 3 21 3 21 9"/><line data-id="384" x1="10" y1="14" x2="21" y2="3"/></svg>
-              View Repository
-            </a>
-          </div>
-
-          <!-- Contribute Card -->
-          <div data-id="385" class="bg-white/5 border border-white/10 rounded-2xl p-8 card-hover">
-            <div data-id="386" class="w-12 h-12 rounded-xl bg-nokware-teal/15 flex items-center justify-center mb-5">
-              <svg data-id="387" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="388" d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle data-id="389" cx="8.5" cy="7" r="4"/><path data-id="390" d="M20 8v6"/><path data-id="391" d="M23 11h-6"/></svg>
-            </div>
-            <h3 data-id="392" class="text-white font-bold text-xl mb-1">Contribute</h3>
-            <p data-id="393" class="text-nokware-teal text-sm mb-4">Everyone is welcome</p>
-            <p data-id="394" class="text-white/55 text-sm leading-relaxed mb-6">
-              Whether you write code, design interfaces, understand clinical operations, or navigate regulatory frameworks — there's a place for you here.
-            </p>
-            <ul data-id="395" class="space-y-3">
-              <li data-id="396" class="flex items-start gap-2.5">
-                <span data-id="397" class="w-1.5 h-1.5 rounded-full bg-nokware-teal mt-2 shrink-0"></span>
-                <span data-id="398" class="text-white/65 text-sm">Good-first-issue tags in every milestone</span>
+            <!-- Credentials -->
+            <ul data-id="563" class="space-y-3 mb-6">
+              <li data-id="564" class="flex items-start gap-2.5 text-white/70 text-sm">
+                <svg data-id="565" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="566" d="M20 6L9 17l-5-5"/></svg>
+                14+ years of Phase I–IV clinical research experience
               </li>
-              <li data-id="399" class="flex items-start gap-2.5">
-                <span data-id="400" class="w-1.5 h-1.5 rounded-full bg-nokware-teal mt-2 shrink-0"></span>
-                <span data-id="401" class="text-white/65 text-sm">Contribution guide & code-of-conduct in repo</span>
+              <li data-id="567" class="flex items-start gap-2.5 text-white/70 text-sm">
+                <svg data-id="568" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="569" d="M20 6L9 17l-5-5"/></svg>
+                Oncology, Ophthalmology, Immunology, ID, Neuro
               </li>
-              <li data-id="402" class="flex items-start gap-2.5">
-                <span data-id="403" class="w-1.5 h-1.5 rounded-full bg-nokware-teal mt-2 shrink-0"></span>
-                <span data-id="404" class="text-white/65 text-sm">Clinical domain expertise valued equally with code</span>
+              <li data-id="570" class="flex items-start gap-2.5 text-white/70 text-sm">
+                <svg data-id="571" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="572" d="M20 6L9 17l-5-5"/></svg>
+                GCP / ICH / FDA regulatory expertise
               </li>
-              <li data-id="405" class="flex items-start gap-2.5">
-                <span data-id="406" class="w-1.5 h-1.5 rounded-full bg-nokware-teal mt-2 shrink-0"></span>
-                <span data-id="407" class="text-white/65 text-sm">MIT License — use it freely in your own research</span>
+              <li data-id="573" class="flex items-start gap-2.5 text-white/70 text-sm">
+                <svg data-id="574" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><path data-id="575" d="M20 6L9 17l-5-5"/></svg>
+                Open Science Advocate
               </li>
             </ul>
+
+            <!-- Contact pills -->
+            <div data-id="576" class="flex flex-col gap-2.5">
+              <a data-id="577" href="tel:+12144734241" class="flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-sm text-white/80 hover:text-white transition-colors" style="background:rgba(255,255,255,0.06);border:1px solid rgba(13,148,136,0.25);">
+                <svg data-id="578" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="579" d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                +1 (214) 473-4241
+              </a>
+              <a data-id="580" href="mailto:inquiries_requests@nokware-research.org" class="flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-sm text-white/80 hover:text-white transition-colors truncate" style="background:rgba(255,255,255,0.06);border:1px solid rgba(13,148,136,0.25);">
+                <svg data-id="581" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><path data-id="582" d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline data-id="583" points="22,6 12,13 2,6"/></svg>
+                <span data-id="584" class="truncate">inquiries_requests@nokware-research.org</span>
+              </a>
+            </div>
           </div>
         </div>
 
-        <!-- Tech Stack Pills -->
-        <div data-id="408" class="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8">
-          <p data-id="409" class="text-white/40 text-xs font-semibold tracking-[0.15em] uppercase text-center mb-5">Tech Stack</p>
-          <div data-id="410" class="flex flex-wrap justify-center gap-3">
-            <span data-id="411" class="bg-gradient-to-r from-white/10 to-white/5 border border-white/20 text-white/75 text-sm font-medium px-4 py-2 rounded-lg">React 18</span>
-            <span data-id="412" class="bg-gradient-to-r from-white/10 to-white/5 border border-white/20 text-white/75 text-sm font-medium px-4 py-2 rounded-lg">TypeScript</span>
-            <span data-id="413" class="bg-gradient-to-r from-white/10 to-white/5 border border-white/20 text-white/75 text-sm font-medium px-4 py-2 rounded-lg">Vite</span>
-            <span data-id="414" class="bg-gradient-to-r from-white/10 to-white/5 border border-white/20 text-white/75 text-sm font-medium px-4 py-2 rounded-lg">TanStack Query v5</span>
-            <span data-id="415" class="bg-gradient-to-r from-white/10 to-white/5 border border-white/20 text-white/75 text-sm font-medium px-4 py-2 rounded-lg">React Router v6</span>
-            <span data-id="416" class="bg-gradient-to-r from-white/10 to-white/5 border border-white/20 text-white/75 text-sm font-medium px-4 py-2 rounded-lg">Node.js</span>
-            <span data-id="417" class="bg-gradient-to-r from-white/10 to-white/5 border border-white/20 text-white/75 text-sm font-medium px-4 py-2 rounded-lg">PostgreSQL</span>
-            <span data-id="418" class="bg-gradient-to-r from-white/10 to-white/5 border border-white/20 text-white/75 text-sm font-medium px-4 py-2 rounded-lg">Tailwind CSS</span>
-            <span data-id="419" class="bg-gradient-to-r from-white/10 to-white/5 border border-white/20 text-white/75 text-sm font-medium px-4 py-2 rounded-lg">Axios</span>
-            <span data-id="420" class="bg-gradient-to-r from-white/10 to-white/5 border border-white/20 text-white/75 text-sm font-medium px-4 py-2 rounded-lg">GitHub Actions CI</span>
-            <span data-id="421" class="bg-gradient-to-r from-white/10 to-white/5 border border-white/20 text-white/75 text-sm font-medium px-4 py-2 rounded-lg">MIT License</span>
+        <!-- RIGHT — Mission text -->
+        <div data-id="585" class="flex-1 reveal reveal-right delay-2">
+          <div data-id="586" class="section-label mb-4" style="color:var(--amber);">WHY NOKWARE?</div>
+          <h2 data-id="587" class="text-2xl md:text-[34px] font-bold text-white leading-snug mb-5">
+            Clinical research technology should be as diverse as the patients it serves.
+          </h2>
+          <p data-id="588" class="text-white/60 text-[15px] leading-relaxed mb-8">
+            Nokware was founded on the belief that clinical trial infrastructure must reflect the diversity, dignity, and rights of every participant. When the tools are transparent, the science earns trust. When the technology is open, innovation is shared. When design centers equity, outcomes improve for everyone.
+          </p>
+
+          <!-- Value pillars -->
+          <div data-id="589" class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+            <div data-id="590" class="rounded-2xl p-5 text-center" style="background:rgba(13,148,136,0.1);border:1px solid rgba(13,148,136,0.2);">
+              <div data-id="591" class="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3" style="background:linear-gradient(135deg,#0D9488,#06B6D4);">
+                <svg data-id="592" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle data-id="593" cx="12" cy="12" r="10"/><path data-id="594" d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+              </div>
+              <div data-id="595" class="text-white font-semibold text-sm">Equity</div>
+            </div>
+            <div data-id="596" class="rounded-2xl p-5 text-center" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.2);">
+              <div data-id="597" class="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3" style="background:linear-gradient(135deg,#7C3AED,#A855F7);">
+                <svg data-id="598" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="599" d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle data-id="600" cx="12" cy="12" r="3"/></svg>
+              </div>
+              <div data-id="601" class="text-white font-semibold text-sm">Transparency</div>
+            </div>
+            <div data-id="602" class="rounded-2xl p-5 text-center" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);">
+              <div data-id="603" class="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3" style="background:linear-gradient(135deg,#F59E0B,#FCD34D);">
+                <svg data-id="604" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="605" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline data-id="606" points="15 3 21 3 21 9"/><line data-id="607" x1="10" y1="14" x2="21" y2="3"/></svg>
+              </div>
+              <div data-id="608" class="text-white font-semibold text-sm">Open Science</div>
+            </div>
           </div>
+
+          <a data-id="609" href="mailto:inquiries_requests@nokware-research.org" class="inline-flex items-center gap-2 text-white text-base font-semibold px-7 py-3.5 rounded-2xl glow-teal hover:scale-105 transition-transform" style="background:linear-gradient(135deg,#0D9488,#06B6D4);">
+            Get in Touch
+            <svg data-id="610" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path data-id="611" d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ═══════════════════════════════════════════════════════════════
-         SECTION 7: ABOUT
-    ════════════════════════════════════════════════════════════════ -->
-    <section data-id="422" id="about" class="bg-white py-20 md:py-24">
-      <div data-id="423" class="max-w-7xl mx-auto px-4 md:px-6">
-        <!-- Section Header -->
-        <div data-id="424" class="text-center mb-14 md:mb-16">
-          <span data-id="425" class="text-nokware-teal text-xs font-bold tracking-[0.2em] uppercase">About</span>
-          <h2 data-id="426" class="text-nokware-navy font-extrabold text-3xl md:text-4xl lg:text-5xl mt-3 mb-4">Why We're Building This</h2>
-          <p data-id="427" class="text-nokware-muted max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-            Nokware was founded on a simple belief: the tools that power clinical research should be as ethical as the research itself.
-          </p>
-        </div>
-
-        <!-- Founder Bio Card -->
-        <div data-id="428" class="bg-gradient-to-br from-nokware-light via-white to-nokware-teal/5 border border-nokware-teal/30 shadow-xl shadow-teal-100/50 rounded-3xl p-10 md:p-14 mb-16">
-          <!-- Founder Badge -->
-          <span data-id="429" class="inline-flex bg-nokware-teal/20 text-nokware-teal text-xs font-semibold tracking-wide uppercase px-4 py-1.5 rounded-full mb-6">Founder</span>
-
-          <!-- Name -->
-          <h3 data-id="430" class="gradient-text font-extrabold text-2xl md:text-3xl mb-2">Kojo A. Quansah Jr., PharmD</h3>
-
-          <!-- Title -->
-          <p data-id="431" class="text-nokware-teal font-semibold text-sm mb-6">Senior Clinical Research Associate · Founder, Nokware Research Solutions</p>
-
-          <!-- Divider -->
-          <div data-id="432" class="w-full h-px bg-nokware-teal/15 mb-6"></div>
-
-          <!-- Bio Paragraph -->
-          <p data-id="433" class="text-nokware-muted leading-relaxed mb-8">
-            With over 14 years driving Phase I–IV clinical trials across oncology, ophthalmology, immunology, infectious disease, and neuroscience, Kojo brings frontline site expertise — from ICH/GCP compliance and 21 CFR audit readiness to field-based monitoring across extensive territories using Veeva Vault CTMS. A primary site liaison who builds trusted investigator relationships and proactively manages recruitment, quality, and risk, he is equally fluent in AI-assisted workflows, including co-designing an AI agent that automated CRA monitoring processes. He founded Nokware Research Solutions to translate that experience into open-source tools that make clinical research faster, more equitable, and more compliant — beginning with e-Delegate, an inspection-ready delegation log platform he designed to replace paper-based processes with audit-traceable electronic records aligned to ICH/GCP delegation-of-authority requirements.
-          </p>
-
-          <!-- Stat Pills -->
-          <div data-id="434" class="flex flex-wrap gap-3">
-            <span data-id="435" class="bg-nokware-teal/10 text-nokware-teal rounded-full px-4 py-1.5 text-sm font-semibold">14+ Years</span>
-            <span data-id="436" class="bg-nokware-teal/10 text-nokware-teal rounded-full px-4 py-1.5 text-sm font-semibold">Phase I–IV</span>
-            <span data-id="437" class="bg-nokware-teal/10 text-nokware-teal rounded-full px-4 py-1.5 text-sm font-semibold">ICH GCP · 21 CFR</span>
-          </div>
-        </div>
-
-        <!-- Three Pillars -->
-        <div data-id="438" class="grid md:grid-cols-3 gap-8 mb-14">
-          <!-- Pillar 1 -->
-          <div data-id="439" class="text-center px-4">
-            <div data-id="440" class="w-16 h-16 rounded-2xl bg-nokware-teal/10 flex items-center justify-center mx-auto mb-5">
-              <svg data-id="441" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="442" d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-            </div>
-            <h3 data-id="443" class="text-nokware-slate font-bold text-lg mb-2">Equity-Driven</h3>
-            <p data-id="444" class="text-nokware-muted text-sm leading-relaxed">
-              We build for the communities most harmed by extractive research practices — ensuring technology serves participants, not just sponsors.
-            </p>
-          </div>
-
-          <!-- Pillar 2 -->
-          <div data-id="445" class="text-center px-4">
-            <div data-id="446" class="w-16 h-16 rounded-2xl bg-nokware-teal/10 flex items-center justify-center mx-auto mb-5">
-              <svg data-id="447" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="448" d="M12 2L3 7v6c0 5.25 3.75 10.05 9 11.25C17.25 23.05 21 18.25 21 13V7l-9-5z"/></svg>
-            </div>
-            <h3 data-id="449" class="text-nokware-slate font-bold text-lg mb-2">Regulation-Ready</h3>
-            <p data-id="450" class="text-nokware-muted text-sm leading-relaxed">
-              ICH GCP and 21 CFR Part 11 compliance isn't a checkbox for us — it's the architecture. Regulatory readiness is a design constraint, not a post-launch patch.
-            </p>
-          </div>
-
-          <!-- Pillar 3 -->
-          <div data-id="451" class="text-center px-4">
-            <div data-id="452" class="w-16 h-16 rounded-2xl bg-nokware-teal/10 flex items-center justify-center mx-auto mb-5">
-              <svg data-id="453" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle data-id="454" cx="12" cy="12" r="10"/><line data-id="455" x1="2" y1="12" x2="22" y2="12"/><path data-id="456" d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-            </div>
-            <h3 data-id="457" class="text-nokware-slate font-bold text-lg mb-2">Open by Default</h3>
-            <p data-id="458" class="text-nokware-muted text-sm leading-relaxed">
-              MIT Licensed, publicly auditable, and community-governed. We believe transparency is the foundation of trust in clinical research technology.
-            </p>
-          </div>
-        </div>
-
-        <!-- CTA Block -->
-        <div data-id="459" class="bg-gradient-to-br from-nokware-navy via-[#0f2d4a] to-[#134e4a] rounded-3xl p-10 md:p-14 text-center">
-          <h3 data-id="460" class="text-white font-extrabold text-2xl md:text-3xl mb-3">Ready to Modernize Your<br data-id="461" class="hidden sm:block"/> Research Operations?</h3>
-          <p data-id="462" class="text-white/55 max-w-xl mx-auto text-sm md:text-base leading-relaxed mb-8">
-            Whether you're a research site, a sponsor, or a fellow builder — we'd love to hear from you. Let's make clinical trials work for everyone.
-          </p>
-          <div data-id="463" class="flex flex-wrap justify-center gap-4 mb-8">
-            <a data-id="464" href="mailto:inquiries_requests@nokware-research.org" class="bg-gradient-to-r from-nokware-teal to-teal-500 text-white font-semibold px-7 py-3.5 rounded-lg hover:bg-emerald-600 transition-colors text-sm md:text-base btn-glow">
-              Get in Touch
-            </a>
-            <a data-id="465" href="https://github.com/nokware-research/e-delegate" target="_blank" rel="noopener noreferrer" class="border border-white/30 text-white font-semibold px-7 py-3.5 rounded-lg hover:border-white/60 hover:bg-white/5 transition-colors text-sm md:text-base flex items-center gap-2">
-              <svg data-id="466" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon data-id="467" points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              Star on GitHub
-            </a>
-          </div>
-
-          <!-- Contact Info: Email & Phone -->
-          <div data-id="468" class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
-            <!-- Email -->
-            <a data-id="469" href="mailto:inquiries_requests@nokware-research.org" class="flex items-center gap-2 text-white/55 hover:text-nokware-teal transition-colors text-sm">
-              <svg data-id="470" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect data-id="471" x="2" y="4" width="20" height="16" rx="2"/><path data-id="472" d="M22 4l-10 8L2 4"/></svg>
-              <span data-id="473">inquiries_requests@nokware-research.org</span>
-            </a>
-            <!-- Phone -->
-            <a data-id="474" href="tel:+12144734241" class="flex items-center gap-2 text-white/55 hover:text-nokware-teal transition-colors text-sm">
-              <svg data-id="475" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="476" d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-              <span data-id="477">+1 (214) 473-4241</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════════════
-         FOOTER
-    ════════════════════════════════════════════════════════════════ -->
-    <footer data-id="478" class="bg-nokware-navy border-t border-white/10 py-10 md:py-12">
-      <div data-id="479" class="max-w-7xl mx-auto px-4 md:px-6">
-        <div data-id="480" class="flex flex-col md:flex-row items-center md:items-start justify-between gap-8">
-          <!-- Logo + Name -->
-          <div data-id="481" class="flex items-center gap-2.5">
-            <svg data-id="482" width="28" height="32" viewBox="0 0 32 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path data-id="483" d="M16 0L30.5 8.5V27.5L16 36L1.5 27.5V8.5L16 0Z" fill="#0D9488"/>
-              <polygon data-id="484" points="16,8 24,13 24,23 16,28 8,23 8,13" fill="white" opacity="0.9"/>
-              <circle data-id="485" cx="16" cy="18" r="3" fill="#0D9488"/>
+  <!-- ===================== FOOTER ===================== -->
+  <footer data-id="612" id="footer-f2x9" class="py-12 md:py-14" style="background:#060f1d;border-top:1px solid rgba(255,255,255,0.08);">
+    <div data-id="613" class="max-w-6xl mx-auto px-5">
+      <div data-id="614" class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 mb-10">
+        <!-- Brand -->
+        <div data-id="615" class="col-span-2 md:col-span-1">
+          <div data-id="616" class="flex items-center gap-2 mb-4">
+            <svg data-id="617" width="28" height="28" viewBox="0 0 40 40" fill="none">
+              <polygon data-id="618" points="20,2 36,11 36,29 20,38 4,29 4,11" fill="url(#logoGrad2)" opacity="0.9"/>
+              <defs data-id="619"><linearGradient data-id="620" id="logoGrad2" x1="0%" y1="0%" x2="100%" y2="100%"><stop data-id="621" offset="0%" stop-color="#0D9488"/><stop data-id="622" offset="100%" stop-color="#06B6D4"/></linearGradient></defs>
+              <circle data-id="623" cx="20" cy="20" r="3.5" fill="white" opacity="0.8"/>
             </svg>
-            <span data-id="486" class="text-white font-bold text-base">Nokware Research Solutions</span>
+            <span data-id="624" class="text-white font-bold text-base">Nokware Research</span>
           </div>
-
-          <!-- Footer Nav Links -->
-          <div data-id="487" class="flex flex-wrap justify-center gap-6">
-            <a data-id="488" href="#problem" class="text-white/45 hover:text-nokware-teal text-sm transition-colors">The Problem</a>
-            <a data-id="489" href="#approach" class="text-white/45 hover:text-nokware-teal text-sm transition-colors">Approach</a>
-            <a data-id="490" href="#edelegate" class="text-white/45 hover:text-nokware-teal text-sm transition-colors">e-Delegate</a>
-            <a data-id="491" href="https://e-delegate.qrx-jay.workers.dev" target="_blank" rel="noopener noreferrer" class="text-white/45 hover:text-nokware-teal text-sm transition-colors">Launch App</a>
-            <a data-id="492" href="#developers" class="text-white/45 hover:text-nokware-teal text-sm transition-colors">Developers</a>
-            <a data-id="493" href="#about" class="text-white/45 hover:text-nokware-teal text-sm transition-colors">About</a>
-          </div>
-
-          <!-- Copyright -->
-          <div data-id="494" class="text-center md:text-right">
-            <p data-id="495" class="text-white/30 text-xs leading-relaxed">
-              MIT License · Open Source<br data-id="496"/>
-              © 2026 Nokware Research Solutions
-            </p>
-          </div>
-        </div>
-
-        <!-- Footer Contact Info -->
-        <div data-id="497" class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
-          <a data-id="498" href="mailto:inquiries_requests@nokware-research.org" class="flex items-center gap-2 text-white/40 hover:text-nokware-teal transition-colors text-xs">
-            <svg data-id="499" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect data-id="500" x="2" y="4" width="20" height="16" rx="2"/><path data-id="501" d="M22 4l-10 8L2 4"/></svg>
-            <span data-id="502">inquiries_requests@nokware-research.org</span>
-          </a>
-          <a data-id="503" href="tel:+12144734241" class="flex items-center gap-2 text-white/40 hover:text-nokware-teal transition-colors text-xs">
-            <svg data-id="504" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-id="505" d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-            <span data-id="506">+1 (214) 473-4241</span>
+          <p data-id="625" class="text-white/40 text-sm leading-relaxed mb-4">
+            Purpose-built clinical trial technology rooted in equity, transparency, and open science.
+          </p>
+          <a data-id="626" href="https://github.com/nokware-research" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-white/40 hover:text-white transition-colors text-sm">
+            <svg data-id="627" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path data-id="628" d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
           </a>
         </div>
 
-        <!-- Made by Copilot -->
-        <div data-id="507" class="mt-8 pt-6 border-t border-white/5 text-center">
-          <p data-id="508" class="text-white/20 text-xs">Made by Copilot</p>
+        <!-- Platform -->
+        <div data-id="629">
+          <h4 data-id="630" class="text-white font-semibold text-sm mb-4">Platform</h4>
+          <ul data-id="631" class="space-y-2.5 text-sm">
+            <li data-id="632"><a data-id="633" href="https://app.nokware-research.org" target="_blank" rel="noopener" class="text-white/40 hover:text-white transition-colors">e-Delegate App</a></li>
+            <li data-id="634"><a data-id="635" href="https://github.com/nokware-research/e-delegate" target="_blank" rel="noopener" class="text-white/40 hover:text-white transition-colors">Source Code</a></li>
+            <li data-id="636"><a data-id="637" href="https://github.com/nokware-research/e-delegate#readme" target="_blank" rel="noopener" class="text-white/40 hover:text-white transition-colors">Documentation</a></li>
+            <li data-id="638"><a data-id="639" href="https://github.com/nokware-research/e-delegate/releases" target="_blank" rel="noopener" class="text-white/40 hover:text-white transition-colors">Changelog</a></li>
+          </ul>
+        </div>
+
+        <!-- Company -->
+        <div data-id="640">
+          <h4 data-id="641" class="text-white font-semibold text-sm mb-4">Company</h4>
+          <ul data-id="642" class="space-y-2.5 text-sm">
+            <li data-id="643"><a data-id="644" href="#about" class="text-white/40 hover:text-white transition-colors">About</a></li>
+            <li data-id="645"><a data-id="646" href="#problem" class="text-white/40 hover:text-white transition-colors">The Problem</a></li>
+            <li data-id="647"><a data-id="648" href="#approach" class="text-white/40 hover:text-white transition-colors">Our Approach</a></li>
+            <li data-id="649"><a data-id="650" href="mailto:inquiries_requests@nokware-research.org" class="text-white/40 hover:text-white transition-colors">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal -->
+        <div data-id="651">
+          <h4 data-id="652" class="text-white font-semibold text-sm mb-4">Legal</h4>
+          <ul data-id="653" class="space-y-2.5 text-sm">
+            <li data-id="654"><a data-id="655" href="https://github.com/nokware-research/e-delegate/blob/main/LICENSE" target="_blank" rel="noopener" class="text-white/40 hover:text-white transition-colors">MIT License</a></li>
+            <li data-id="656"><a data-id="657" href="#" class="text-white/40 hover:text-white transition-colors">Privacy</a></li>
+            <li data-id="658"><a data-id="659" href="#" class="text-white/40 hover:text-white transition-colors">Security</a></li>
+            <li data-id="660"><a data-id="661" href="#" class="text-white/40 hover:text-white transition-colors">Compliance</a></li>
+          </ul>
         </div>
       </div>
-    </footer>
 
-    <!-- ═══════════════════════════════════════════════════════════════
-         SCRIPTS
-    ════════════════════════════════════════════════════════════════ -->
-    <script>
-      (function() {
-        // ── Mobile Menu Toggle ──
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        let menuOpen = false;
+      <!-- Bottom bar -->
+      <div data-id="662" class="pt-8 border-t border-white/[0.08] flex flex-col md:flex-row items-center justify-between gap-3">
+        <p data-id="663" class="text-white/30 text-xs text-center md:text-left">
+          © 2026 Nokware Research Solutions. Built in public. MIT Licensed. Made by Copilot
+        </p>
+        <a data-id="664" href="https://nokware-research.org" target="_blank" rel="noopener" class="text-teal text-xs font-medium hover:underline">
+          nokware-research.org
+        </a>
+      </div>
+    </div>
+  </footer>
 
-        if (menuBtn && mobileMenu) {
-          menuBtn.addEventListener('click', function() {
-            menuOpen = !menuOpen;
-            mobileMenu.classList.toggle('hidden', !menuOpen);
-            // Update hamburger icon to X when open
-            menuBtn.innerHTML = menuOpen
-              ? '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
-              : '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
-          });
+  <!-- Scroll to top button -->
+  <button data-id="665" id="scroll-top-btn-s5t1" class="scroll-top-btn fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full flex items-center justify-center text-white shadow-lg" style="background:linear-gradient(135deg,#0D9488,#06B6D4);" aria-label="Scroll to top">
+    <svg data-id="666" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path data-id="667" d="M18 15l-6-6-6 6"/></svg>
+  </button>
 
-          // Close mobile menu when a link is clicked
-          var mobileLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
-          mobileLinks.forEach(function(link) {
-            link.addEventListener('click', function() {
-              menuOpen = false;
-              mobileMenu.classList.add('hidden');
-              menuBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
-            });
-          });
-        }
+  <script>
+    // ============ 1. Nav scroll behavior ============
+    const mainNav = document.getElementById('main-nav-el2k');
+    function handleNavScroll() {
+      if (window.scrollY > 80) {
+        mainNav.classList.add('scrolled');
+      } else {
+        mainNav.classList.remove('scrolled');
+      }
+    }
+    window.addEventListener('scroll', handleNavScroll, { passive: true });
+    handleNavScroll();
 
-        // ── Active Nav Highlighting on Scroll ──
-        var sections = document.querySelectorAll('section[id]');
-        var navLinks = document.querySelectorAll('nav a[href^="#"]');
+    // ============ 2. Active nav links (IntersectionObserver) ============
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link[data-nav-section]');
 
-        function highlightNav() {
-          var scrollPos = window.scrollY + 100;
-          sections.forEach(function(section) {
-            var top = section.offsetTop;
-            var height = section.offsetHeight;
-            var id = section.getAttribute('id');
-            if (scrollPos >= top && scrollPos < top + height) {
-              navLinks.forEach(function(link) {
-                if (link.getAttribute('href') === '#' + id) {
-                  link.classList.remove('text-white/65');
-                  link.classList.add('text-nokware-teal');
-                } else if (!link.classList.contains('bg-nokware-teal') && !link.classList.contains('mobile-nav-link')) {
-                  link.classList.remove('text-nokware-teal');
-                  link.classList.add('text-white/65');
-                }
-              });
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach(link => {
+            if (link.dataset.navSection === id) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
             }
           });
         }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
 
-        window.addEventListener('scroll', highlightNav, { passive: true });
-        highlightNav();
+    sections.forEach(section => {
+      if (section.id && section.id !== 'hero-s7q2' && section.id !== 'stats-bar-s3k9') {
+        sectionObserver.observe(section);
+      }
+    });
 
-        // ── Fade-in on Scroll (Intersection Observer) ──
-        var fadeTargets = document.querySelectorAll('.card-hover');
-        if ('IntersectionObserver' in window) {
-          var observer = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-              if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-                observer.unobserve(entry.target);
-              }
-            });
-          }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    // ============ 3. Mobile menu ============
+    const hamburgerBtn = document.getElementById('hamburger-btn-m9x2');
+    const mobileMenu = document.getElementById('mobile-menu-o8k1');
+    const mobileCloseBtn = document.getElementById('mobile-close-c3j7');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 
-          fadeTargets.forEach(function(el) {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-          });
+    hamburgerBtn.addEventListener('click', () => {
+      mobileMenu.classList.add('open');
+      hamburgerBtn.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+
+    mobileCloseBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburgerBtn.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburgerBtn.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // ============ 4. Scroll reveal ============
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
         }
-      })();
-    </script>
-  </body>
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // ============ 5. Counter animation ============
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      const duration = 2000;
+      const step = target / (duration / 16);
+      let current = 0;
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = Math.floor(current) + suffix;
+        if (current >= target) {
+          el.textContent = target + suffix;
+          clearInterval(timer);
+        }
+      }, 16);
+    }
+
+    const counterNums = document.querySelectorAll('.counter-num');
+    let countersFired = false;
+    const statsBar = document.getElementById('stats-bar-s3k9');
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !countersFired) {
+          countersFired = true;
+          counterNums.forEach(el => animateCounter(el));
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    if (statsBar) counterObserver.observe(statsBar);
+
+    // ============ 6. Feature tabs ============
+    const featureTabs = document.querySelectorAll('.feature-tab');
+    const featurePanels = document.querySelectorAll('.feature-panel');
+
+    featureTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const feature = tab.dataset.feature;
+        featureTabs.forEach(t => t.classList.remove('active'));
+        featurePanels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        const panel = document.querySelector(`[data-panel="${feature}"]`);
+        if (panel) panel.classList.add('active');
+      });
+    });
+
+    // ============ 7. Smooth scroll ============
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ============ 8. Scroll-to-top button ============
+    const scrollTopBtn = document.getElementById('scroll-top-btn-s5t1');
+    function handleScrollTopVisibility() {
+      if (window.scrollY > 400) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    }
+    window.addEventListener('scroll', handleScrollTopVisibility, { passive: true });
+    handleScrollTopVisibility();
+
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ============ Lucide icons (progressive enhancement) ============
+    if (typeof lucide !== "undefined" && typeof lucide.createIcons === "function") {
+      lucide.createIcons();
+    }
+  </script>
+</body>
 </html>
